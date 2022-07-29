@@ -8,12 +8,10 @@ import java.sql.ResultSet;
 public class AccountManager {
     private Connection accountsDB;
     private Connection skillsDB;
-    private int id;
 
     public AccountManager(Connection accountsDB, Connection skillsDB){
         this.accountsDB = accountsDB;
         this.skillsDB = skillsDB;
-        id = 1;
     }
 
     public boolean accountExists(String name){
