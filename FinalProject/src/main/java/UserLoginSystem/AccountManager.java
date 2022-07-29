@@ -3,15 +3,16 @@ package UserLoginSystem;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.ResultSet;
 
-public class AccountMannager {
+public class AccountManager {
     private Connection accountsDB;
+    private Connection skillsDB;
     private int id;
 
-    public AccountMannager(Connection conn){
-        accountsDB = conn;
+    public AccountManager(Connection accountsDB, Connection skillsDB){
+        this.accountsDB = accountsDB;
+        this.skillsDB = skillsDB;
         id = 1;
     }
 
@@ -21,10 +22,12 @@ public class AccountMannager {
     public boolean enterAccount(String name, String password){
         return false;
     }
-    public void addAccount(String name, String password){
+    public void addAccount(String name, String password){ }
 
+
+    public ResultSet searchPeopleBySkill(String skill){
+        return null;
     }
-
 
 
     private static String hexToString(byte[] bytes) {
