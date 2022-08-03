@@ -29,13 +29,25 @@ public class createQuestionServlet extends HttpServlet {
 
         Question newQuestion;
         Answer newAnswer;
-        if(questionResponseQuestion.NAME.equals(chosenType)){
+        if(questionResponseQuestion.NAME.equals(chosenType) &&
+                !request.getParameter(questionResponseQuestion.QUESTION_NAME).equals("") &&
+                !request.getParameter(questionResponseAnswer.ANSWER_NAME).equals("")){
             newQuestion = new questionResponseQuestion(request.getParameter(questionResponseQuestion.QUESTION_NAME));
             newAnswer = new questionResponseAnswer(request.getParameter(questionResponseAnswer.ANSWER_NAME));
-        } else if(fillBlankQuestion.NAME.equals(chosenType)){
+
+            q.addProblem(newQuestion, newAnswer);
+        } else if(fillBlankQuestion.NAME.equals(chosenType) &&
+                !request.getParameter(fillBlankQuestion.FIRST_PART_NAME).equals("") &&
+                !request.getParameter(fillBlankQuestion.SECOND_PART_NAME).equals("") &&
+                !request.getParameter(fillBlankAnswer.ANSWER_NAME).equals("")){
             newQuestion = new fillBlankQuestion(request.getParameter(fillBlankQuestion.FIRST_PART_NAME), request.getParameter(fillBlankQuestion.SECOND_PART_NAME));
             newAnswer = new fillBlankAnswer(request.getParameter(fillBlankAnswer.ANSWER_NAME));
-        } else if(multipleChoiceQuestion.NAME.equals(chosenType)){
+
+            q.addProblem(newQuestion, newAnswer);
+        } else if(multipleChoiceQuestion.NAME.equals(chosenType) &&
+                !request.getParameter(multipleChoiceQuestion.QUESTION_NAME).equals("") &&
+                !request.getParameter("Answer1").equals("") &&
+                !request.getParameter("CorrectAnswer").equals("")){
             newQuestion = new multipleChoiceQuestion(request.getParameter(multipleChoiceQuestion.QUESTION_NAME));
             newAnswer = new multipleChoiceAnswer();
             for(int i = 1; i <= 6; i++){
@@ -47,11 +59,16 @@ public class createQuestionServlet extends HttpServlet {
             }
             String correctAnswer = request.getParameter("CorrectAnswer");
             ((multipleChoiceAnswer) newAnswer).setCorrectAnswer(correctAnswer);
-        } else {//if(pictureResponseQuestion.NAME.equals(chosenType))
+
+            q.addProblem(newQuestion, newAnswer);
+        } else if(pictureResponseQuestion.NAME.equals(chosenType) &&
+                !request.getParameter(pictureResponseQuestion.QUESTION_NAME).equals("") &&
+                !request.getParameter(pictureResponseAnswer.ANSWER_NAME).equals("")){//
             newQuestion = new pictureResponseQuestion(request.getParameter(pictureResponseQuestion.QUESTION_NAME));
             newAnswer = new pictureResponseAnswer(request.getParameter(pictureResponseAnswer.ANSWER_NAME));
+
+            q.addProblem(newQuestion, newAnswer);
         }
-        q.addProblem(newQuestion, newAnswer);
 
 //        System.out.println(request.getParameter(questionResponseQuestion.QUESTION_NAME));
 //        System.out.println(request.getParameter(questionResponseAnswer.ANSWER_NAME));
