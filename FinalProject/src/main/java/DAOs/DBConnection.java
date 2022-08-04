@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class UserDBConnection {
+public class DBConnection {
     private static final Connection con;
 
     private static final String DATABASENAME = "";
