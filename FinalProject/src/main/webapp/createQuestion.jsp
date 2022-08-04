@@ -30,6 +30,7 @@
 </head>
     <body>
         <h1>Create new Question:</h1><br>
+        <p>(If question or answer field is left empty, new question will not be added.)</p>
         <%
             out.println(createForm(questionResponseQuestion.NAME, questionResponseQuestion.createQuestionHtmlCode, questionResponseAnswer.createAnswerHtmlCode));
             out.println(createForm(fillBlankQuestion.NAME, fillBlankQuestion.createQuestionHtmlCode, fillBlankAnswer.createAnswerHtmlCode));
