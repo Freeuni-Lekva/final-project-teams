@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
 </head>
 <body>
     <form action="/LoginServlet" method="POST" >
