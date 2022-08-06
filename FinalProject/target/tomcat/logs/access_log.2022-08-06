@@ -1,0 +1,7 @@
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:17:13 +0400] "GET / HTTP/1.1" 200 181 http-bio-8088-exec-1 190
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:17:13 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8088-exec-2 3
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:17:19 +0400] "GET /login.jsp HTTP/1.1" 200 135 http-bio-8088-exec-4 63
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:17:27 +0400] "GET /register.jsp HTTP/1.1" 200 509 http-bio-8088-exec-5 1043
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:25:40 +0400] "GET /createAccount.jsp HTTP/1.1" 200 152 http-bio-8088-exec-7 166
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:25:47 +0400] "GET /createAccountt.jsp HTTP/1.1" 404 987 http-bio-8088-exec-9 4
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:08:25:50 +0400] "GET /createAccount.jsp HTTP/1.1" 200 152 http-bio-8088-exec-10 5
