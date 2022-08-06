@@ -11,8 +11,10 @@ import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 
@@ -34,4 +36,5 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
 }
