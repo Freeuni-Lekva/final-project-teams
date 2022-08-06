@@ -14,6 +14,8 @@ public class managerListener implements ServletContextListener, HttpSessionListe
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         /* This method is called when the servlet context is initialized(when the Web application is deployed). */
+        AccountManager accounts = new AccountManager(null, null);
+        sce.getServletContext().setAttribute("Manager", accounts);
     }
 
     @Override
