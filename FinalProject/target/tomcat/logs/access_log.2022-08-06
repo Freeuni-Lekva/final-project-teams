@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:13:19:01 +0400] "GET /login.jsp HTTP/1.1" 200 408 http-bio-8088-exec-2 108
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:13:19:01 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8088-exec-3 3
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:13:19:16 +0400] "POST /LoginServlet HTTP/1.1" 500 3413 http-bio-8088-exec-4 771
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:13:19:24 +0400] "GET /createAccount.jsp HTTP/1.1" 200 152 http-bio-8088-exec-1 54
