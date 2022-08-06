@@ -10,6 +10,9 @@
 
 <%!
     public String createList(List<String> lst) {
+        if(lst == null)  {
+            return "<h1>There are no such users<h1>";
+        }
         StringBuffer buf = new StringBuffer();
         buf.append("<ol start = \"1\">\n");
         for (String str: lst) {
@@ -28,7 +31,7 @@
 </head>
 <body>
     <%
-       List<String> lst = (List<String>) getServletConfig().getServletContext().getAttribute("accountsFoundList");
+       List<String> lst = (List<String>) request.getAttribute("accountsFoundList");
         out.println(createList(lst));
     %>
 </body>

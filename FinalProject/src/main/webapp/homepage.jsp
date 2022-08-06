@@ -28,7 +28,7 @@
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
 </head>
 <body>
-    <form action="/SearchServlet" method="GET" >
+    <form action="/SearchUserServlet" method="GET" >
         <input type="text" placeholder="User Name" name="UserName" id="UserName">
         <input type="submit" value="Search"><br>
     </form>

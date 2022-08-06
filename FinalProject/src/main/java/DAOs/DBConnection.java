@@ -9,7 +9,7 @@ public class DBConnection {
 
     private static final String DATABASENAME = "test";
     private static final String USER = "root";
-    private static final String PASSWORD = "rootroot";
+    private static final String PASSWORD = "rkinabetoni";
 
     static {
         try {

@@ -14,7 +14,7 @@
     <form action="CreateAccountServlet" method="post">
         <input type="text" placeholder="Name" name="UserName" id="UserName">
         <input type="text" placeholder="Password" name="Password" id ="Password">
-        <input type="submit" value="login"><br>
+        <input type="submit" value="register"><br>
     </form>
 </body>
 </html>

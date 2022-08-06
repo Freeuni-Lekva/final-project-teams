@@ -37,6 +37,7 @@ public class AccountDAO {
     }
 
     public boolean addAccount(String username, String password) throws SQLException, NoSuchAlgorithmException {
+        if(username.trim().length() == 0 || password.trim().length() == 0) return false;
         if(!accountUsernameExists(username)){
             String hash = hashString(password);
             PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO accounts (username, password_hash) " +
