@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "SearchUserServlet", value = "/SearchUserServlet")
 public class SearchUserServlet extends HttpServlet {
@@ -16,7 +17,11 @@ public class SearchUserServlet extends HttpServlet {
         AccountManager manager = (AccountManager) getServletContext().getAttribute("Manager");
         String userName = request.getParameter("UserName");
         AccountDAO acc = new AccountDAO();
-        request.setAttribute("accountsFoundList", acc.searchAccountByUsername(userName));
+        try {
+            request.setAttribute("accountsFoundList", acc.searchAccountsByUsername(userName));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("searchUser.jsp");
         dispatcher.forward(request, response);
     }
