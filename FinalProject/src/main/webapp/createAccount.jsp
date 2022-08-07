@@ -9,12 +9,16 @@
 <html>
 <head>
     <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="login.css" />
 </head>
 <body>
-    <form action="CreateAccountServlet" method="post">
-        <input type="text" placeholder="Name" name="UserName" id="UserName">
-        <input type="text" placeholder="Password" name="Password" id ="Password">
-        <input type="submit" value="register"><br>
-    </form>
+    <div class = "LoginContainer">
+        <form action="CreateAccountServlet" method="post">
+            <h2>Register</h2>
+            <div><input type="text" placeholder="Name" name="UserName" id="UserName"></div>
+            <div><input type="text" placeholder="Password" name="Password" id ="Password"></div>
+            <input type="submit" value="register"><br>
+        </form>
+    </div>
 </body>
 </html>
