@@ -82,5 +82,5 @@ public class FriendDAO {
         ResultSet rs = prepStmt.executeQuery();
         if(rs.next()) return true;
         return false;
-    };
+    }
 }

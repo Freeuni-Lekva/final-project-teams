@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountDAO {
     private final Connection conn;
@@ -35,6 +37,7 @@ public class AccountDAO {
     }
 
     public boolean addAccount(String username, String password) throws SQLException, NoSuchAlgorithmException {
+        if(username.trim().length() == 0 || password.trim().length() == 0) return false;
         if(!accountUsernameExists(username)){
             String hash = hashString(password);
             PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO accounts (username, password_hash) " +
@@ -48,8 +51,19 @@ public class AccountDAO {
     }
 
     // amaze ar vici vabshe
-    public ResultSet searchAccountByUsername(String username){
-        return null;
+    public List<String> searchAccountsByUsername(String username) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement("SELECT username FROM accounts WHERE " +
+                "username LIKE ?;");
+        prepStmt.setString(1, username + "%");
+        ResultSet rs = prepStmt.executeQuery();
+
+        List<String> accounts = new ArrayList<>();
+
+        while(rs.next()){
+            accounts.add(rs.getString("username"));
+        }
+
+        return accounts;
     }
 
     // returns Account Id by using its username. returns -1 if there is no such account with the

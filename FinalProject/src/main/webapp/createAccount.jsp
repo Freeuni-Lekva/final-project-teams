@@ -8,11 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="login.css" />
 </head>
 <body>
-    <form action="CreateAccountServlet" method="post">
-
-    </form>
+    <div class = "LoginContainer">
+        <form action="CreateAccountServlet" method="post">
+            <h2>Register</h2>
+            <div><input type="text" placeholder="Name" name="UserName" id="UserName"></div>
+            <div><input type="text" placeholder="Password" name="Password" id ="Password"></div>
+            <input type="submit" value="register"><br>
+        </form>
+    </div>
 </body>
 </html>
