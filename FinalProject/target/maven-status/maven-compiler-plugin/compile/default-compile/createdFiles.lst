@@ -9,6 +9,7 @@ Quizzes\pictureResponseAnswer.class
 UserLoginSystem\AccountManager.class
 UserLoginSystem\LoginServlet.class
 Quizzes\Question.class
+UserPage\UserStatsServlet.class
 UserLoginSystem\managerListener.class
 Quizzes\questionResponseAnswer.class
 Quizzes\Quiz.class
