@@ -12,6 +12,13 @@ CREATE TABLE friends(
                         CONSTRAINT fk_friend_id2 FOREIGN KEY (friend_id2) REFERENCES accounts(id)
 );
 
+CREATE TABLE quizHistory(
+                         id INT PRIMARY KEY AUTO_INCREMENT,
+                         username VARCHAR(255) UNIQUE NOT NULL,
+                         score INT NOT NULL,
+                         quiz_time Date SYSDATE
+);
+
 CREATE TABLE mails(
     id INT PRIMARY KEY AUTO_INCREMENT,
     sender_id INT NOT NULL,
