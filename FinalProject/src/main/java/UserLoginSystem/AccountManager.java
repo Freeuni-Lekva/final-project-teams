@@ -1,9 +1,12 @@
 package UserLoginSystem;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
+import javax.resource.cci.ResultSet;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 
 public class AccountManager {
     private Connection accountsDB;
@@ -14,16 +17,16 @@ public class AccountManager {
         this.skillsDB = skillsDB;
     }
 
-    public boolean accountExists(String name){
+    public boolean accountExists(MysqlxDatatypes.Scalar.String name){
         return false;
     }
-    public boolean enterAccount(String name, String password){
+    public boolean enterAccount(MysqlxDatatypes.Scalar.String name, MysqlxDatatypes.Scalar.String password){
         return false;
     }
-    public void addAccount(String name, String password){ }
+    public void addAccount(MysqlxDatatypes.Scalar.String name, MysqlxDatatypes.Scalar.String password){ }
 
 
-    public ResultSet searchPeopleBySkill(String skill){
+    public ResultSet searchPeopleBySkill(MysqlxDatatypes.Scalar.String skill){
         return null;
     }
 

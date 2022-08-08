@@ -9,15 +9,18 @@
 <html>
 <head>
     <title>Try Again</title>
+    <link rel="stylesheet" type="text/css" href="login.css" />
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
 </head>
 <body>
-<h1>User Name or Password was incorrect, Try Again please</h1>
-<form action="/LoginServlet" method="POST" >
-    <input type="text" placeholder="Name" name="UserName" id="UserName">
-    <input type="text" placeholder="Password" name="Password" id ="Password">
-    <input type="submit" value="login"><br>
-</form>
-<a href="createAccount.jsp">Create New Account</a>
+<div class="LoginContainer">
+    <form action="/LoginServlet" method="POST" >
+        <h4>User Name or Password was incorrect, Try Again please</h4>
+        <div><input type="text" placeholder="Name" name="UserName" id="UserName"></div>
+        <div><input type="text" placeholder="Password" name="Password" id ="Password"></div>
+        <input type="submit" value="login"><br>
+        <a href="createAccount.jsp">Create New Account</a>
+    </form>
+</div>
 </body>
 </html>
