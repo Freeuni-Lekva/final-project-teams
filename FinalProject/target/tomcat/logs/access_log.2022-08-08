@@ -46,3 +46,13 @@
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:33:50 +0400] "GET /LoginServlet HTTP/1.1" 200 - http-bio-8088-exec-5 0
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:34:08 +0400] "GET /UserStatsServlet HTTP/1.1" 200 114 http-bio-8088-exec-6 16
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:34:11 +0400] "GET /UserStatsServlet HTTP/1.1" 200 114 http-bio-8088-exec-7 0
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:39:40 +0400] "GET / HTTP/1.1" 200 839 http-bio-8088-exec-9 24
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:39:40 +0400] "GET /login.css HTTP/1.1" 304 - http-bio-8088-exec-9 8
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:39:47 +0400] "GET /register.jsp HTTP/1.1" 200 509 http-bio-8088-exec-9 72
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:39:54 +0400] "GET /createAccount.jsp HTTP/1.1" 200 557 http-bio-8088-exec-9 28
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:40:37 +0400] "GET /finishCreatingQuiz.jsp HTTP/1.1" 200 608 http-bio-8088-exec-9 168
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:44:23 +0400] "GET /tryAgain.jsp HTTP/1.1" 200 200 http-bio-8088-exec-6 171
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:44:34 +0400] "GET /ryAgain.jsp HTTP/1.1" 404 973 http-bio-8088-exec-6 0
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:44:39 +0400] "GET /tryAgain.jsp HTTP/1.1" 200 200 http-bio-8088-exec-6 8
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:09:55:09 +0400] "GET /homePage.jsp HTTP/1.1" 404 975 http-bio-8088-exec-3 48
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:09:55:20 +0400] "GET /homepage.jsp HTTP/1.1" 200 711 http-bio-8088-exec-3 697

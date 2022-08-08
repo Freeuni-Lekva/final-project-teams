@@ -14,9 +14,10 @@ CREATE TABLE friends(
 
 CREATE TABLE quizHistory(
                          id INT PRIMARY KEY AUTO_INCREMENT,
-                         username VARCHAR(255) UNIQUE NOT NULL,
+                         quiz_id INT NOT NULL,
+                         user_id INT NOT NULL,
                          score INT NOT NULL,
-                         quiz_time Date SYSDATE
+                         quiz_time VARCHAR(4000) NOT NULL
 );
 
 CREATE TABLE mails(
