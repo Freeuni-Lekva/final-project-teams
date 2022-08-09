@@ -19,4 +19,12 @@ public class multipleChoiceQuestion implements Question{
     public String questionHtmlCode() {
         return "<p>" + question + "</p>";
     }
+    @Override
+    public String getQuestionType() {
+        return NAME;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
 }
