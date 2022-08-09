@@ -1,5 +1,6 @@
 h<%@ page import="Quizzes.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="DAOs.quizzesDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: shmagi
@@ -11,6 +12,8 @@ h<%@ page import="Quizzes.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Quiz quiz = (Quiz) application.getAttribute("QUIZ");
+    quizzesDAO quizDB = (quizzesDAO) application.getAttribute("QUIZ_DB");
+    quiz = quizDB.getQuiz(11);
 //    Quiz quiz = new Quiz();
 //    quiz.addProblem(new Problem(new questionResponseQuestion("what is 1 + 1?"),  new questionResponseAnswer("2")));
 //    quiz.addProblem(new Problem(new questionResponseQuestion("which year was computer created?"),  new questionResponseAnswer("1945")));

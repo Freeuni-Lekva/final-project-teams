@@ -14,7 +14,7 @@ public class multipleChoiceAnswer implements Answer{
                                                         "<label>Enter Correct Answer:   </label><br>" +
                                                         "<input type=\"text\" id=\"Answer1\" name=\"CorrectAnswer\"><br>";
 
-    private List<String> answers;
+    private ArrayList<String> answers;
     private String correctAnswer;
     public multipleChoiceAnswer(){
         answers = new ArrayList<>();
@@ -40,6 +40,11 @@ public class multipleChoiceAnswer implements Answer{
 //        htmlString += "</form>";
         return htmlString;
     }
+
+    public ArrayList<String> getAnswers() {
+        return answers;
+    }
+
     @Override
     public String getAnswer() {
         return correctAnswer;

@@ -30,3 +30,40 @@ CREATE TABLE mails(
     CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES accounts(id),
     CONSTRAINT fk_sender_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
 );
+
+CREATE TABLE quizzes(
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        name VARCHAR(255),
+                        description VARCHAR(255)
+);
+
+CREATE TABLE question_response(
+                                quiz_id INT,
+                                question VARCHAR(255),
+                                answer VARCHAR(255)
+);
+
+CREATE TABLE picture_response(
+                                  quiz_id INT,
+                                  url VARCHAR(255),
+                                  answer VARCHAR(255)
+);
+
+CREATE TABLE fill_blank(
+                                 quiz_id INT,
+                                 first_part VARCHAR(255),
+                                 second_part VARCHAR(255),
+                                 answer VARCHAR(255)
+);
+
+CREATE TABLE multiple_choice(
+                           quiz_id INT,
+                           question VARCHAR(255),
+                           correct_answer VARCHAR(255),
+                           answer1 VARCHAR(255),
+                           answer2 VARCHAR(255),
+                           answer3 VARCHAR(255),
+                           answer4 VARCHAR(255),
+                           answer5 VARCHAR(255),
+                           answer6 VARCHAR(255)
+);

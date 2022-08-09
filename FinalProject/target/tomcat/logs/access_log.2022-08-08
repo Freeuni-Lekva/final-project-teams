@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:00:36:25 +0400] "GET / HTTP/1.1" 200 181 http-bio-8088-exec-1 160
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:00:36:25 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8088-exec-2 0
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:00:36:26 +0400] "GET /hello-servlet HTTP/1.1" 200 53 http-bio-8088-exec-3 8
@@ -56,3 +57,7 @@
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:07:44:39 +0400] "GET /tryAgain.jsp HTTP/1.1" 200 200 http-bio-8088-exec-6 8
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:09:55:09 +0400] "GET /homePage.jsp HTTP/1.1" 404 975 http-bio-8088-exec-3 48
 0:0:0:0:0:0:0:1 - - [08/Aug/2022:09:55:20 +0400] "GET /homepage.jsp HTTP/1.1" 200 711 http-bio-8088-exec-3 697
+=======
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:18:21:29 +0400] "GET /createQuestion.jsp HTTP/1.1" 200 2621 http-bio-8088-exec-1 1328
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:18:21:29 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8088-exec-2 2
+>>>>>>> Quizzes
