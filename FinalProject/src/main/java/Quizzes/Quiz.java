@@ -29,6 +29,14 @@ public class Quiz {
         Description = description;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
     public ArrayList<Problem> getQuiz(){
         return quiz;
     }

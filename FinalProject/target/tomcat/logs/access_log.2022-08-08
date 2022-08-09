@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:18:21:29 +0400] "GET /createQuestion.jsp HTTP/1.1" 200 2621 http-bio-8088-exec-1 1328
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:18:21:29 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8088-exec-2 2

@@ -20,4 +20,14 @@ public class pictureResponseQuestion implements Question{
     public String questionHtmlCode() {
         return "<br><img src=\"" + imgUrl + "\" width=\"100\" height=\"100\"><br>";
     }
+
+    @Override
+    public String getQuestionType() {
+        return NAME;
+    }
+
+    public String getImgUrl(){
+        return imgUrl;
+    }
 }
+
