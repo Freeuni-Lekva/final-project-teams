@@ -34,6 +34,12 @@
     </form>
 
     <h1><b>Home Page</b></h1>
+
+    <a href="addFriend.jsp">Add Friend</a>
+    <a href="mails.jsp">Mails</a>
+    <p>   <a href="friendList.jsp">Friends</a> </p>
+
+
     <p>Popular Quizzes</p>
         <h2>
             <%

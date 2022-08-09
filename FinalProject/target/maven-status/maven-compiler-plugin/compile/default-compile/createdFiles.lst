@@ -10,8 +10,10 @@ UserLoginSystem\AccountManager.class
 UserLoginSystem\LoginServlet.class
 Quizzes\Question.class
 UserPage\UserStatsServlet.class
+UserPage\AddFriendServlet.class
 UserLoginSystem\managerListener.class
 Quizzes\questionResponseAnswer.class
+DAOs\quizHistoryDao.class
 Quizzes\Quiz.class
 UserPage\UserManager.class
 DAOs\AccountUserDAO.class
@@ -22,8 +24,7 @@ Quizzes\multipleChoiceAnswer.class
 DAOs\AccountDAO.class
 Quizzes\pictureResponseQuestion.class
 Quizzes\multipleChoiceQuestion.class
-UserPage\mailMessagesServlet.class
-UserPage\addFriendServlet.class
+DAOs\quizUserHistoryDao.class
 DAOs\FriendDAO.class
 Quizzes\questionResponseQuestion.class
 UserLoginSystem\CreateAccountServlet.class
