@@ -82,6 +82,17 @@ public class AccountDAO {
         }
     }
 
+    public String getUserNameByAccountId(int user_id) throws SQLException {
+        AccountDAO accDao = new AccountDAO();
+            PreparedStatement prepStmt = conn.prepareStatement("SELECT a.username FROM accounts a " +
+                    "where a.id = ?;");
+            prepStmt.setInt(1, user_id);
+            ResultSet rs = prepStmt.executeQuery();
+            rs.next();
+            return rs.getString("username");
+
+    }
+
     private static String hexToString(byte[] bytes) {
         StringBuffer buff = new StringBuffer();
         for (int i=0; i<bytes.length; i++) {

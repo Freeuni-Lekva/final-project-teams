@@ -1,0 +1,56 @@
+h1{
+    text-align: center;
+}
+
+#usernameSearch{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+#profileDropdown{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-block;
+}
+
+#dropdownButton {
+    background-color: orange;
+    color: white;
+    width:100px;
+    padding: 6px;
+    font-size: 15px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border:none;
+    border-radius: 4px;
+}
+
+#dropdownButton:hover{
+    background-color: darkorange;
+}
+
+.dropdownContent {
+    position: absolute;
+    background-color: white;
+    min-width:200px;
+    font-size:13px;
+    padding: 5px;
+    display:none;
+    border: 1px solid black;
+}
+
+.dropdownContent a {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdownContent a:hover{
+    background-color: lightgray;
+}
+
+.showDropdown{
+    display:block;
+}

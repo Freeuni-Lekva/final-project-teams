@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package ObjectClasses;
 
 public class User {
@@ -12,5 +17,4 @@ public class User {
     public String getLink() {
         return "";
     }
-
 }

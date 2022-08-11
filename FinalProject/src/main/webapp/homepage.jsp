@@ -25,29 +25,48 @@
 <html>
 <head>
     <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="homepageStyle.css" />
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
 </head>
 <body>
+<h1><b>Home Page</b></h1>
+
+<div id="profileDropdown">
+    <small>Logged in as:</small>
+    <br>
+    <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
+    <div id="dropdownContent" class="dropdownContent">
+        <a href="addFriend.jsp">Add Friend</a>
+        <br>
+        <a href="mails.jsp">Mails</a>
+        <br>
+        <a href="friendList.jsp">Friends</a>
+    </div>
+</div>
+
+
+<div id="usernameSearch">
     <form action="/SearchUserServlet" method="GET" >
-        <input type="text" placeholder="User Name" name="UserName" id="UserName">
+        <input type="text" placeholder="username" name="UserName" id="UserName">
         <input type="submit" value="Search"><br>
     </form>
+</div>
 
-    <h1><b>Home Page</b></h1>
-    <p>Popular Quizzes</p>
-        <h2>
-            <%
-            %>
-        </h2>
-    <p>Recent Quizzes Activity</p>
-    <h2>
-        <%
-        %>
-    </h2>
-    <p>Recently Created Quizzes</p>
-    <h2>
-        <%
-        %>
-    </h2>
+<p>Popular Quizzes</p>
+<h2>
+    <%
+    %>
+</h2>
+<p>Recent Quizzes Activity</p>
+<h2>
+    <%
+    %>
+</h2>
+<p>Recently Created Quizzes</p>
+<h2>
+    <%
+    %>
+</h2>
+<script src="homepageFunctions.js"></script>
 </body>
 </html>
