@@ -1,6 +1,6 @@
 package Quizzes;
 
-import DAOs.quizzesDAO;
+import DAOs.QuizzesDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,7 +19,7 @@ public class quizCreatingListener implements ServletContextListener, HttpSession
         ServletContext sc = sce.getServletContext();
         sc.setAttribute("QUIZ", quiz);
 
-        quizzesDAO db = new quizzesDAO();
+        QuizzesDao db = new QuizzesDao();
         sc.setAttribute("QUIZ_DB", db);
 
     }

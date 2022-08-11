@@ -1,10 +1,12 @@
 Project\project.class
 UserPage\SearchUserServlet.class
-DAOs\quizzesDAO.class
+UserPage\ChallengeForQuizServlet.class
+UserPage\AcceptQuizChallengeServlet.class
 com\example\finalproject\HelloServlet.class
 DAOs\DBConnection.class
 Quizzes\quizCreatingListener.class
 Quizzes\markQuizServlet.class
+DAOs\QuizzesDao.class
 Quizzes\pictureResponseAnswer.class
 UserLoginSystem\AccountManager.class
 UserLoginSystem\LoginServlet.class
@@ -28,4 +30,5 @@ DAOs\quizUserHistoryDao.class
 DAOs\FriendDAO.class
 Quizzes\questionResponseQuestion.class
 UserLoginSystem\CreateAccountServlet.class
+UserPage\SendMessageServlet.class
 Quizzes\Problem.class

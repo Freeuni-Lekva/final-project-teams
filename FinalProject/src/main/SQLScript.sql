@@ -26,6 +26,7 @@ CREATE TABLE mails(
     receiver_id INT NOT NULL,
     mail_type VARCHAR(255) NOT NULL,
     message VARCHAR(255) NOT NULL,
+    quiz_id INT NOT NULL DEFAULT -1,
     date_sent	DATETIME DEFAULT   CURRENT_TIMESTAMP,
     CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES accounts(id),
     CONSTRAINT fk_sender_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
