@@ -1,13 +1,12 @@
 package Quizzes;
 
-import DAOs.quizzesDAO;
+import DAOs.QuizzesDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 @WebServlet(name = "createQuestionServlet", value = "/createQuestionServlet")
 public class createQuestionServlet extends HttpServlet {
@@ -31,7 +30,7 @@ public class createQuestionServlet extends HttpServlet {
             q.setQuizType(quizType);
 //            System.out.println(q.getQuizType());
 
-            quizzesDAO db = (quizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
+            QuizzesDao db = (QuizzesDao) request.getServletContext().getAttribute("QUIZ_DB");
             try {
                 db.addQuiz(q);
             } catch (SQLException e) {

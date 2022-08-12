@@ -14,16 +14,30 @@ public class Mail {
     private final String type;
     private final String message;
 
-    public Mail(int sender_id, int receiver_id, String type, String message) throws SQLException {
+    private final int quiz_id;
+
+    private final int id;
+
+    public Mail(int sender_id, int receiver_id, String type, String message, int id) throws SQLException {
+        this(sender_id, receiver_id, type, message, -1, id);
+    }
+
+    public Mail (int sender_id, int receiver_id, String type, String message, int quiz_id, int id) throws SQLException {
         AccountDAO accountDAO = new AccountDAO();
         this.sender = accountDAO.getUserNameByAccountId(sender_id);
         this.receiver = accountDAO.getUserNameByAccountId(receiver_id);
         this.type = type;
         this.message = message;
+        this.quiz_id = quiz_id;
+        this.id = id;
     }
 
     public String getSender() {
         return this.sender;
+    }
+
+    public int getQuiz_id() {
+        return quiz_id;
     }
 
     public String getReceiver() {
@@ -36,5 +50,9 @@ public class Mail {
 
     public String getType() {
         return this.type;
+    }
+
+    public int getId() {
+        return id;
     }
 }

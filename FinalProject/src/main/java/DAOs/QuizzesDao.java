@@ -5,8 +5,8 @@ import Quizzes.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class quizzesDAO {
-    private static final String addQuizCommand = "INSERT INTO quizzes (name, description, quiz_type, num_participants_made) VALUES (?, ?, ?, ?);";
+public class QuizzesDao {
+    private static final String addQuizCommand = "INSERT INTO quizzes (name, description) VALUES (?, ?);";
 
     private static final String addQuestionResponseCommand = "INSERT INTO question_response (quiz_id, question, answer) VALUES (?, ?, ?);";
     private static final String addPictureResponseCommand = "INSERT INTO picture_response (quiz_id, url, answer) VALUES (?, ?, ?);";
@@ -17,7 +17,7 @@ public class quizzesDAO {
     private static final String getLastId = "SELECT max(id) FROM quizzes;";
 
     private final Connection conn;
-    public quizzesDAO() {
+    public QuizzesDao() {
         conn = DBConnection.getConnection();
     }
     public int getMaxId() throws SQLException {
@@ -69,8 +69,6 @@ public class quizzesDAO {
         PreparedStatement prepStmt = conn.prepareStatement(addQuizCommand);
         prepStmt.setString(1, quiz.getName());
         prepStmt.setString(2, quiz.getDescription());
-        prepStmt.setString(3, quiz.getQuizType());
-        prepStmt.setInt(4, 0);
         prepStmt.executeUpdate();
 
         int quizId = getMaxId();
@@ -175,4 +173,6 @@ public class quizzesDAO {
         }
         return null;
     }
+
+    public boolean quizExists(int quiz_id) {return true;}
 }

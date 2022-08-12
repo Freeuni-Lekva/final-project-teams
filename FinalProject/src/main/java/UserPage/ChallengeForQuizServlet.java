@@ -2,6 +2,7 @@ package UserPage;
 
 import DAOs.AccountDAO;
 import DAOs.MailsDao;
+import DAOs.QuizzesDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,24 +14,39 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
+
 @WebServlet(
-        name = "addFriendServlet",
-        value = {"/addFriendServlet"}
+        name = "challengeForQuizServlet",
+        value = {"/challengeForQuizServlet"}
 )
-public class AddFriendServlet extends HttpServlet {
+public class ChallengeForQuizServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("UserNameOfFriend");
+        int quizId = -1;
+        try {
+             quizId = Integer.parseInt(request.getParameter("ChallengedQuizId"));
+        } catch (NumberFormatException ex) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
+            dispatcher.forward(request,response);
+        }
         String messageForFriend = request.getParameter("MessageForAddingFriend");
         AccountDAO acc = new AccountDAO();
+        QuizzesDao quizzesDao = new QuizzesDao();
+
+        if(!quizzesDao.quizExists(quizId)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
+            dispatcher.forward(request,response);
+            return;
+        }
 
         try {
             if (acc.accountUsernameExists(userName)) {
                 MailsDao mailsDao = new MailsDao();
-                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.ADD_FRIEND, messageForFriend);
+                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.CHALLENGE_QUIZ, messageForFriend);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
                 dispatcher.forward(request, response);
             } else {
