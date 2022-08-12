@@ -12,6 +12,11 @@
     response.setHeader("Pragma","no-cache");
     response.setDateHeader ("Expires", 0);
 %>
+<%
+    if(application.getAttribute("QUIZ") == null){
+        application.setAttribute("QUIZ", new Quiz());
+    }
+%>
 <%!
     public String createForm(String label, String questionInputs, String answerInputs){
         return    "<label><b>" + label + ":</b></label><br>" +

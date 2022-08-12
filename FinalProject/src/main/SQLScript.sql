@@ -42,11 +42,6 @@ CREATE TABLE mails(
     CONSTRAINT fk_sender_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
 );
 
-CREATE TABLE quizzes(
-                        id INT PRIMARY KEY AUTO_INCREMENT,
-                        name VARCHAR(255),
-                        description VARCHAR(255)
-);
 
 CREATE TABLE question_response(
                                   quiz_id INT,

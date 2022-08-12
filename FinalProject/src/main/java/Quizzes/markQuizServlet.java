@@ -12,8 +12,13 @@ public class markQuizServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+    private void clearAttributes(HttpServletRequest request, HttpServletResponse response){
+        request.getServletContext().removeAttribute("QUIZ");
+        request.getSession().removeAttribute("LAST_ID");
+//        request.getSession().removeAttribute("USER_MARK");
+//        request.getSession().removeAttribute("MAX_MARK");
+    }
     private void doForSinglePage(Quiz q, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        System.out.println("Shemovida");
         ArrayList<Problem> quiz = q.getQuiz();
 
         int totalMark = 0;
@@ -30,6 +35,7 @@ public class markQuizServlet extends HttpServlet {
         }
         request.getSession().setAttribute("USER_MARK", "" + totalMark);
         request.getSession().setAttribute("MAX_MARK", "" + outOf);
+        clearAttributes(request, response);
         request.getRequestDispatcher("quizResultPage.jsp").forward(request, response);
     }
     private void doForMultiplePage(Quiz q, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -55,7 +61,7 @@ public class markQuizServlet extends HttpServlet {
         if(lastId >= quiz.size()){
             request.getSession().setAttribute("USER_MARK", "" + currMark);
             request.getSession().setAttribute("MAX_MARK", "" + quiz.size());
-            request.getSession().removeAttribute("LAST_ID");
+            clearAttributes(request, response);
             request.getRequestDispatcher("quizResultPage.jsp").forward(request, response);
             return;
         }
@@ -70,7 +76,6 @@ public class markQuizServlet extends HttpServlet {
         } else if(q.getQuizType().equals(q.MULTIPLE_PAGE)){
             doForMultiplePage(q, request, response);
         }
-
     }
 }
 
