@@ -21,6 +21,10 @@
             <input type="text" id="quizName" name="quizName"><br>
             <label for="quizDescription">Enter Quiz Description:</label><br>
             <input type="text" id="quizDescription" name="quizDescription"><br>
+            <input type="radio" id="onePage" name="quizShowStyle" value="singlePage">
+            <label for="onePage">Single Page</label><br>
+            <input type="radio" id="multiplePage" name="quizShowStyle" value="multiplePage">
+            <label for="multiplePage">Multiple Page</label><br>
             <input type="hidden" value="finishedDescriptions" name="questionType">
             <input type="submit" value="Finish">
         </form>

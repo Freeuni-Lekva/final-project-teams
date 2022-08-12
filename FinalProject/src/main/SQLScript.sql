@@ -1,3 +1,13 @@
+USE test;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS friends;
+DROP TABLE IF EXISTS quizHistory;
+DROP TABLE IF EXISTS mails;
+DROP TABLE IF EXISTS question_response;
+DROP TABLE IF EXISTS picture_response;
+DROP TABLE IF EXISTS fill_blank;
+DROP TABLE IF EXISTS multiple_choice;
+DROP TABLE IF EXISTS quizzes;
 CREATE TABLE accounts(
                          id INT PRIMARY KEY AUTO_INCREMENT,
                          username VARCHAR(255) UNIQUE NOT NULL,
@@ -16,6 +26,8 @@ CREATE TABLE quizzes(
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255),
                         description VARCHAR(255),
+                        quiz_type VARCHAR(255),
+                        num_participants_made INT,
                         quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP
 );
 
@@ -42,7 +54,6 @@ CREATE TABLE mails(
 );
 
 CREATE TABLE question_response(
-                                  id INT PRIMARY KEY,
                                   quiz_id INT,
                                   question VARCHAR(255),
                                   answer VARCHAR(255),
@@ -50,7 +61,6 @@ CREATE TABLE question_response(
 );
 
 CREATE TABLE picture_response(
-                                 id INT PRIMARY KEY,
                                  quiz_id INT,
                                  url VARCHAR(255),
                                  answer VARCHAR(255),
@@ -58,7 +68,6 @@ CREATE TABLE picture_response(
 );
 
 CREATE TABLE fill_blank(
-                           id INT PRIMARY KEY,
                            quiz_id INT,
                            first_part VARCHAR(255),
                            second_part VARCHAR(255),
@@ -67,7 +76,6 @@ CREATE TABLE fill_blank(
 );
 
 CREATE TABLE multiple_choice(
-                                id INT PRIMARY KEY,
                                 quiz_id INT,
                                 question VARCHAR(255),
                                 correct_answer VARCHAR(255),

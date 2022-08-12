@@ -7,6 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.setHeader("Cache-Control","no-cache");
+    response.setHeader("Pragma","no-cache");
+    response.setDateHeader ("Expires", 0);
+%>
 <%!
     public String createForm(String label, String questionInputs, String answerInputs){
         return    "<label><b>" + label + ":</b></label><br>" +
@@ -19,11 +24,7 @@
                   "</form>";
     }
 %>
-<%
-    response.setHeader("Cache-Control","no-cache");
-    response.setHeader("Pragma","no-cache");
-    response.setDateHeader ("Expires", 0);
-%>
+
 <html>
 <head>
     <title>Create Quiz</title>

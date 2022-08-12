@@ -24,8 +24,12 @@ public class createQuestionServlet extends HttpServlet {
         if("finishedDescriptions".equals(chosenType)){
             String quizName = request.getParameter("quizName");
             String quizDescription = request.getParameter("quizDescription");
+            String quizType = request.getParameter("quizShowStyle");
+
             q.setName(quizName);
             q.setDescription(quizDescription);
+            q.setQuizType(quizType);
+//            System.out.println(q.getQuizType());
 
             quizzesDAO db = (quizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
             try {
