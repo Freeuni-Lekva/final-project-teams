@@ -19,10 +19,21 @@
             StringBuffer buf = new StringBuffer();
             buf.append("<ol start = \"1\">\n");
             for(Mail mail : lst) {
-                if (mail.getType().equals("addFriend")) {
+                if (mail.getType().equals(MailsDao.ADD_FRIEND)) {
                     buf.append("<li>").append("User: ").append(mail.getSender()).append(" Sent you friend request and this message : \n")
                             .append(mail.getMessage()).append("\n  <form action=\"/acceptFriendRequestServlet\" method=\"POST\" >\n   " + "<input type = \"hidden\" value =  ")
                             .append(mail.getSender()).append(" name = \"FriendSender\" id = \"FriendSender\">")
+                            .append("<input type = \"hidden\" value =  ").append(mail.getId()).append(" name = \"MailId\" id = \"MailId\"> ")
+                            .append("<input type=\"submit\" value=\"accept\"><br>\n </form>").append("</li>\n");
+                }
+                 else if (mail.getType().equals(MailsDao.MESSAGE)) {
+                    buf.append("<li>").append("User: ").append(mail.getSender()).append(" Sent you this message : \n")
+                            .append(mail.getMessage()).append("</li>\n");
+                } else if(mail.getType().equals(MailsDao.CHALLENGE_QUIZ)) {
+                    buf.append("<li>").append("User: ").append(mail.getSender()).append(" Challenged you for quizz id:").append(mail.getQuiz_id()).append(" and this message : \n")
+                            .append(mail.getMessage()).append("\n  <form action=\"/acceptQuizChallengeServlet\" method=\"POST\" >\n   " + "<input type = \"hidden\" value =  ")
+                            .append(mail.getSender()).append(" name = \"ChallengeSender\" id = \"ChallengeSender\">")
+                            .append("<input type = \"hidden\" value =  ").append(mail.getId()).append(" name = \"MailId\" id = \"MailId\"> ")
                             .append("<input type=\"submit\" value=\"accept\"><br>\n </form>").append("</li>\n");
                 }
             }

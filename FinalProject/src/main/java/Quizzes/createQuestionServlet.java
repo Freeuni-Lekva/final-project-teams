@@ -1,13 +1,12 @@
 package Quizzes;
 
-import DAOs.quizzesDAO;
+import DAOs.QuizzesDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 @WebServlet(name = "createQuestionServlet", value = "/createQuestionServlet")
 public class createQuestionServlet extends HttpServlet {
@@ -19,22 +18,28 @@ public class createQuestionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String chosenType = request.getParameter("questionType");
+//        Quiz q = new Quiz();
+//        request.getServletContext().setAttribute("QUIZ", q);
         Quiz q = (Quiz) request.getServletContext().getAttribute("QUIZ");
 
         if("finishedDescriptions".equals(chosenType)){
             String quizName = request.getParameter("quizName");
             String quizDescription = request.getParameter("quizDescription");
+            String quizType = request.getParameter("quizShowStyle");
+
             q.setName(quizName);
             q.setDescription(quizDescription);
+            q.setQuizType(quizType);
+//            System.out.println(q.getQuizType());
 
-            quizzesDAO db = (quizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
+            QuizzesDAO db = (QuizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
             try {
                 db.addQuiz(q);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            request.getRequestDispatcher("quiz.jsp").forward(request, response);
+            request.getServletContext().removeAttribute("QUIZ");
+            request.getRequestDispatcher("showQuizzes.jsp").forward(request, response);
             return;
         }
 

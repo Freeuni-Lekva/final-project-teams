@@ -5,19 +5,23 @@ import Quizzes.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class quizzesDAO {
-    private static final String addQuizCommand = "INSERT INTO quizzes (name, description) VALUES (?, ?);";
+public class QuizzesDAO {
+    private static final String addQuizCommand = "INSERT INTO quizzes (name, description, quiz_type, num_participants_made) VALUES (?, ?, ?, ?);";
 
     private static final String addQuestionResponseCommand = "INSERT INTO question_response (quiz_id, question, answer) VALUES (?, ?, ?);";
     private static final String addPictureResponseCommand = "INSERT INTO picture_response (quiz_id, url, answer) VALUES (?, ?, ?);";
     private static final String addFillBlankCommand = "INSERT INTO fill_blank (quiz_id, first_part, second_part, answer) VALUES (?, ?, ?, ?);";
     private static final String addMultipleChoiceCommand = "INSERT INTO multiple_choice (quiz_id, question, correct_answer, " +
-                                                        "answer1, answer2, answer3, answer4, answer5, answer6) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            "answer1, answer2, answer3, answer4, answer5, answer6) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String getLastId = "SELECT max(id) FROM quizzes;";
 
+    private static final String quizExists = "SELECT * FROM quizzes q where q.id = ";
+
+    private static final String getAllQuizzes = "SELECT * FROM quizzes;";
+
     private final Connection conn;
-    public quizzesDAO() {
+    public QuizzesDAO() {
         conn = DBConnection.getConnection();
     }
     public int getMaxId() throws SQLException {
@@ -69,6 +73,8 @@ public class quizzesDAO {
         PreparedStatement prepStmt = conn.prepareStatement(addQuizCommand);
         prepStmt.setString(1, quiz.getName());
         prepStmt.setString(2, quiz.getDescription());
+        prepStmt.setString(3, quiz.getQuizType());
+        prepStmt.setInt(4, 0);
         prepStmt.executeUpdate();
 
         int quizId = getMaxId();
@@ -78,7 +84,7 @@ public class quizzesDAO {
             addProblem(p, quizId);
         }
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final String getQuizById = "SELECT * from quizzes q where q.id = ";
 
     private static final String getQuestionResponseByQuizId = "SELECT * from question_response q where q.quiz_id = ";
@@ -91,11 +97,12 @@ public class quizzesDAO {
         ResultSet rs = stm.executeQuery(execute + quizId + ";");
         return rs;
     }
-    private void addQuizNameAndDescription(Quiz q, int quizId) throws SQLException {
+    private void addQuizInformation(Quiz q, int quizId) throws SQLException {
         ResultSet rs = executeStatement(getQuizById, quizId);
         if(rs.next()){
             q.setName(rs.getString(2));
             q.setDescription(rs.getString(3));
+            q.setQuizType(rs.getString(4));
         }
     }
     private void addQuestionResponseProblems(Quiz q, int quizId) throws SQLException {
@@ -146,7 +153,7 @@ public class quizzesDAO {
         }
         Quiz q = new Quiz();
 
-        addQuizNameAndDescription(q, quizId);
+        addQuizInformation(q, quizId);
         addQuestionResponseProblems(q, quizId);
         addPictureResponseProblems(q, quizId);
         addFillBlankProblems(q, quizId);
@@ -172,5 +179,18 @@ public class quizzesDAO {
             return rs.getString(3);
         }
         return null;
+    }
+    public boolean quizExists(int quizId) throws SQLException {
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(quizExists + quizId + ";");
+        if(rs.next()){
+            return true;
+        }
+        return false;
+    }
+    public ResultSet allRows() throws SQLException {
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(getAllQuizzes);
+        return rs;
     }
 }

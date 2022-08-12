@@ -14,23 +14,23 @@ import java.sql.SQLException;
 
 
 @WebServlet(
-        name = "addFriendServlet",
-        value = {"/addFriendServlet"}
+        name = "sendMessageServlet",
+        value = {"/sendMessageServlet"}
 )
-public class AddFriendServlet extends HttpServlet {
+public class SendMessageServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("UserNameOfFriend");
-        String messageForFriend = request.getParameter("MessageForAddingFriend");
+        String userName = request.getParameter("UserNameOfOtherUser");
+        String messageForFriend = request.getParameter("MessageToUser");
         AccountDAO acc = new AccountDAO();
 
         try {
             if (acc.accountUsernameExists(userName)) {
                 MailsDao mailsDao = new MailsDao();
-                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.ADD_FRIEND, messageForFriend);
+                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.MESSAGE, messageForFriend);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
                 dispatcher.forward(request, response);
             } else {

@@ -16,33 +16,34 @@ CREATE TABLE quizzes(
                         id INT PRIMARY KEY AUTO_INCREMENT,
                         name VARCHAR(255),
                         description VARCHAR(255),
+                        quiz_type VARCHAR(255),
+                        num_participants_made INT,
                         quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP
 );
 
 
 CREATE TABLE quizHistory(
-                            id INT PRIMARY KEY AUTO_INCREMENT,
-                            quiz_id INT NOT NULL,
-                            user_id INT NOT NULL,
-                            score INT NOT NULL,
-                            quiz_completion_date DATETIME DEFAULT   CURRENT_TIMESTAMP,
-                            CONSTRAINT fk_quiz_id FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
-                            CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES accounts(id)
+                         id INT PRIMARY KEY AUTO_INCREMENT,
+                         quiz_id INT NOT NULL,
+                         user_id INT NOT NULL,
+                         score INT NOT NULL,
+                         quiz_time VARCHAR(4000) NOT NULL
 );
 
 CREATE TABLE mails(
-                      id INT PRIMARY KEY AUTO_INCREMENT,
-                      sender_id INT NOT NULL,
-                      receiver_id INT NOT NULL,
-                      mail_type VARCHAR(255) NOT NULL,
-                      message VARCHAR(255) NOT NULL,
-                      date_sent DATETIME DEFAULT   CURRENT_TIMESTAMP,
-                      CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES accounts(id),
-                      CONSTRAINT fk_receiver_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    mail_type VARCHAR(255) NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    quiz_id INT NOT NULL DEFAULT -1,
+    date_sent	DATETIME DEFAULT   CURRENT_TIMESTAMP,
+    CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES accounts(id),
+    CONSTRAINT fk_sender_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
 );
 
+
 CREATE TABLE question_response(
-                                  id INT PRIMARY KEY,
                                   quiz_id INT,
                                   question VARCHAR(255),
                                   answer VARCHAR(255),
@@ -50,7 +51,6 @@ CREATE TABLE question_response(
 );
 
 CREATE TABLE picture_response(
-                                 id INT PRIMARY KEY,
                                  quiz_id INT,
                                  url VARCHAR(255),
                                  answer VARCHAR(255),
@@ -58,7 +58,6 @@ CREATE TABLE picture_response(
 );
 
 CREATE TABLE fill_blank(
-                           id INT PRIMARY KEY,
                            quiz_id INT,
                            first_part VARCHAR(255),
                            second_part VARCHAR(255),
@@ -67,7 +66,6 @@ CREATE TABLE fill_blank(
 );
 
 CREATE TABLE multiple_choice(
-                                id INT PRIMARY KEY,
                                 quiz_id INT,
                                 question VARCHAR(255),
                                 correct_answer VARCHAR(255),

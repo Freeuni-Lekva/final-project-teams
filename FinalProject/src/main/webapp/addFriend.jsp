@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <title>Add Friend</title>
-    <head><title>Add Friend</title>
+    <head>
+        <title>Add Friend</title>
    </head>
 <body>
  <form action="/addFriendServlet" method="POST" >
