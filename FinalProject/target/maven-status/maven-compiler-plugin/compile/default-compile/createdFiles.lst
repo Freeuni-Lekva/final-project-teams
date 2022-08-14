@@ -1,10 +1,13 @@
+DAOs\QuizzHistoryPERDAO.class
 Project\project.class
 UserPage\SearchUserServlet.class
 DAOs\quizzesDAO.class
+UserPage\CustomQuizStatsServlet.class
 com\example\finalproject\HelloServlet.class
 DAOs\DBConnection.class
 Quizzes\quizCreatingListener.class
 Quizzes\markQuizServlet.class
+UserPage\QuizHistoryGetServlet.class
 Quizzes\pictureResponseAnswer.class
 UserLoginSystem\AccountManager.class
 UserLoginSystem\LoginServlet.class
