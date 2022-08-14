@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package ObjectClasses;
 
 public class User {
@@ -9,8 +14,15 @@ public class User {
         this.userName = userName;
     }
 
+    public int getUserId() {
+        return user_id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
     public String getLink() {
         return "";
     }
-
 }

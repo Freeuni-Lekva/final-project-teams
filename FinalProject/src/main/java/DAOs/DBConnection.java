@@ -8,8 +8,8 @@ public class DBConnection {
     private static final Connection con;
 
     private static final String DATABASENAME = "test";
-    private static final String USER = "root";
-    private static final String PASSWORD = "rkinabetoni";
+    private static final String USER = "final";
+    private static final String PASSWORD = "rootroot";
 
     static {
         try {

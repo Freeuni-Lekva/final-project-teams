@@ -29,4 +29,16 @@ public class fillBlankQuestion implements Question{
     public String questionHtmlCode() {
         return "<p>" + firstPart + "_______" + secondPart + "</p>";
     }
+    @Override
+    public String getQuestionType() {
+        return NAME;
+    }
+
+    public String getFirstPart() {
+        return firstPart;
+    }
+
+    public String getSecondPart() {
+        return secondPart;
+    }
 }

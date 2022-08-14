@@ -1,5 +1,7 @@
 package Quizzes;
 
+import DAOs.QuizzesDAO;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -13,9 +15,12 @@ public class quizCreatingListener implements ServletContextListener, HttpSession
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         /* This method is called when the servlet context is initialized(when the Web application is deployed). */
-        Quiz quiz = new Quiz();
         ServletContext sc = sce.getServletContext();
-        sc.setAttribute("QUIZ", quiz);
+//        Quiz quiz = new Quiz();
+//        sc.setAttribute("QUIZ", quiz);
+        QuizzesDAO db = new QuizzesDAO();
+        sc.setAttribute("QUIZ_DB", db);
+
     }
 
     @Override
