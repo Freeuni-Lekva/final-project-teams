@@ -35,7 +35,7 @@
         <br>
         <p>Percentage:
             <%
-                out.println("" + Integer.parseInt(userMark) / Integer.parseInt(totalMark) * 100 + "%");
+                out.println("" + 100.0 * Integer.parseInt(userMark) / Integer.parseInt(totalMark) + "%");
             %>
         </p>
     </body>

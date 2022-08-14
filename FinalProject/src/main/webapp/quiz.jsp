@@ -1,5 +1,6 @@
 h<%@ page import="Quizzes.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="DAOs.QuizzesDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: shmagi
@@ -10,28 +11,30 @@ h<%@ page import="Quizzes.*" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Quiz quiz = (Quiz) application.getAttribute("QUIZ");
-//    Quiz quiz = new Quiz();
-//    quiz.addProblem(new Problem(new questionResponseQuestion("what is 1 + 1?"),  new questionResponseAnswer("2")));
-//    quiz.addProblem(new Problem(new questionResponseQuestion("which year was computer created?"),  new questionResponseAnswer("1945")));
-//    quiz.addProblem(new Problem(new fillBlankQuestion("which year", "computer created?"),  new fillBlankAnswer("1945")));
-//
-//    multipleChoiceAnswer mca1 = new multipleChoiceAnswer();
-//    mca1.addAnswer("12");
-//    mca1.addAnswer("55");
-//    mca1.addAnswer("3124");
-//    mca1.addAnswer("45");
-//    quiz.addProblem(new Problem(new multipleChoiceQuestion("which year was computer created?"),  mca1));
-//
-//    quiz.addProblem(new Problem(new pictureResponseQuestion("images/BaltimoreOriole.png"),  new pictureResponseAnswer("Baltimore Oriole")));
-
-//    fillBlankAnswer ans = new fillBlankAnswer("sdd");
-%>
-<%
     response.setHeader("Cache-Control","no-cache");
     response.setHeader("Pragma","no-cache");
     response.setDateHeader ("Expires", 0);
 %>
+<%
+//    Quiz quiz = (Quiz) application.getAttribute("QUIZ");
+    QuizzesDAO quizDB = (QuizzesDAO) application.getAttribute("QUIZ_DB");
+    Quiz quiz;
+    if(request.getParameter("id") == null){
+        quiz = (Quiz) request.getServletContext().getAttribute("QUIZ");
+    } else {
+        int id = Integer.parseInt(request.getParameter("id"));
+        quiz = quizDB.getQuiz(id);
+        request.getServletContext().setAttribute("QUIZ", quiz);
+    }
+
+
+    if(quiz.getQuizType().equals(quiz.MULTIPLE_PAGE) && request.getSession().getAttribute("LAST_ID") == null){
+        request.getSession().setAttribute("USER_MARK", "0");
+        request.getSession().setAttribute("LAST_ID", "0");
+    }
+%>
+
+
 <html>
     <head>
         <title>Quiz</title>
@@ -41,15 +44,22 @@ h<%@ page import="Quizzes.*" %>
             <ol>
                 <%
                     ArrayList<Problem> list = quiz.getQuiz();
-                    for(int i = 0; i < list.size(); i++){
-                        out.println("<li>");
-                        out.println(list.get(i).getQuestion().questionHtmlCode());
-                        out.println(list.get(i).getAnswer().answerPromptHtmlCode(i));
-                        out.println("</li>");
+                    if(quiz.getQuizType().equals(quiz.SINGLE_PAGE)){
+                        for(int i = 0; i < list.size(); i++){
+                            out.println("<li>");
+                            out.println(list.get(i).getQuestion().questionHtmlCode());
+                            out.println(list.get(i).getAnswer().answerPromptHtmlCode(i));
+                            out.println("</li>");
+                        }
+                    } else if(quiz.getQuizType().equals(quiz.MULTIPLE_PAGE)){
+                        int lastId = Integer.parseInt((String)request.getSession().getAttribute("LAST_ID"));
+                        out.println(list.get(lastId).getQuestion().questionHtmlCode());
+                        out.println(list.get(lastId).getAnswer().answerPromptHtmlCode(lastId));
                     }
+
                 %>
             </ol>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Next">
         </form>
 
     </body>

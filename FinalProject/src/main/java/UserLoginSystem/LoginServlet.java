@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
         AccountDAO acc = new AccountDAO();
         try {
             if(acc.isAccountValid(userName, password)){
+                request.getSession().setAttribute("UserName", userName);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
                 dispatcher.forward(request, response);
             } else {
