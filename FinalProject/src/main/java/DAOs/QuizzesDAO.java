@@ -19,6 +19,7 @@ public class QuizzesDAO {
     private static final String quizExists = "SELECT * FROM quizzes q where q.id = ";
 
     private static final String getAllQuizzes = "SELECT * FROM quizzes;";
+    private static final String getQuizzesCount = "SELECT COUNT(*) FROM quizzes;";
 
     private final Connection conn;
     public QuizzesDAO() {
@@ -189,8 +190,16 @@ public class QuizzesDAO {
         return false;
     }
     public ResultSet allRows() throws SQLException {
-        Statement stm = conn.createStatement();
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = stm.executeQuery(getAllQuizzes);
         return rs;
+    }
+    public int getQuizzesCount() throws SQLException {
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stm.executeQuery(getQuizzesCount);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        return 0;
     }
 }

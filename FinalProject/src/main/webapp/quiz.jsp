@@ -1,4 +1,4 @@
-h<%@ page import="Quizzes.*" %>
+<%@ page import="Quizzes.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DAOs.QuizzesDAO" %>
 <%--
@@ -40,6 +40,7 @@ h<%@ page import="Quizzes.*" %>
         <title>Quiz</title>
     </head>
     <body>
+
         <form name="quiz" method="post" action="markQuizServlet">
             <ol>
                 <%
@@ -53,6 +54,7 @@ h<%@ page import="Quizzes.*" %>
                         }
                     } else if(quiz.getQuizType().equals(quiz.MULTIPLE_PAGE)){
                         int lastId = Integer.parseInt((String)request.getSession().getAttribute("LAST_ID"));
+                        out.println("<h4>" + lastId + ". </h4>");
                         out.println(list.get(lastId).getQuestion().questionHtmlCode());
                         out.println(list.get(lastId).getAnswer().answerPromptHtmlCode(lastId));
                     }
