@@ -14,6 +14,14 @@ public class User {
         this.userName = userName;
     }
 
+    public int getUserId() {
+        return user_id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
     public String getLink() {
         return "";
     }

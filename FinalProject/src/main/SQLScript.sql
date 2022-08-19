@@ -77,3 +77,21 @@ CREATE TABLE multiple_choice(
                                 answer6 VARCHAR(255),
                                 CONSTRAINT fk_mc_quiz_id FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
 );
+
+
+CREATE TABLE achievements(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    icon_url VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE user_achievements(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    achievement_id INT NOT NULL,
+    CONSTRAINT fk_usach_user_id FOREIGN KEY (user_id) REFERENCES accounts (id),
+    CONSTRAINT fk_usach_achievement_id FOREIGN KEY (achievement_id) REFERENCES achievements(id)
+);
+
+/* aq insertebis script iqneba sachiro rom user_achievements-shi chaikaros yvela achievementi */
