@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @WebServlet(name = "ShowQuizzesServlet", value = "/ShowQuizzesServlet")
@@ -42,11 +43,33 @@ public class ShowQuizzesServlet extends HttpServlet {
             request.getRequestDispatcher("showQuizzes.jsp?page=" + currPage).forward(request, response);
         }
     }
+    private void updateResultSet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        request.setAttribute("page", 1);
+        if(request.getParameter("sort") != null){
+            request.getSession().setAttribute("sort", request.getParameter("sort"));
+        } else {
+            request.getSession().setAttribute("sort", "Sort by creation date");
+        }
+        if(request.getParameter("search") != null){
+            request.getSession().setAttribute("search", request.getParameter("search"));
+        } else if(request.getSession().getAttribute("search") == null){
+            request.getSession().setAttribute("search", "");
+        }
+
+        request.getRequestDispatcher("showQuizzes.jsp?page=1").forward(request, response);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("prev") != null || request.getParameter("jumpTo") != null || request.getParameter("next") != null){
             try {
                 changePage(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(request.getParameter("search") != null || request.getParameter("sort") != null){
+            try {
+                updateResultSet(request, response);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

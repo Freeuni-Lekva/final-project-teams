@@ -1,4 +1,4 @@
-<%--
+<%@ page import="DAOs.QuizzesDAO" %><%--
   Created by IntelliJ IDEA.
   User: shmagi
   Date: 01.08.22
@@ -15,11 +15,17 @@
     String userMark = (String)request.getSession().getAttribute("USER_MARK");
     String totalMark = (String)request.getSession().getAttribute("MAX_MARK");
 %>
+<%
+    QuizzesDAO quizDB = (QuizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
+    int quizId = Integer.parseInt((String)request.getSession().getAttribute("QUIZ_ID"));
+    quizDB.updateQuizPopularity(quizId);
+%>
 <html>
 <head>
     <title>Results</title>
 </head>
     <body>
+    <h1><b>Quiz Name: <%out.println(quizDB.getQuizName(quizId));%></b></h1><br>
         <h>YOUR MARK IS:</h>
         <p>Your mark:
             <%
@@ -38,5 +44,6 @@
                 out.println("" + 100.0 * Integer.parseInt(userMark) / Integer.parseInt(totalMark) + "%");
             %>
         </p>
+        <a href="showQuizzes.jsp">Quizzes page</a>
     </body>
 </html>

@@ -165,3 +165,12 @@
 0:0:0:0:0:0:0:1 - - [19/Aug/2022:13:14:44 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5403 http-bio-8088-exec-3 43
 0:0:0:0:0:0:0:1 - - [19/Aug/2022:13:14:47 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5397 http-bio-8088-exec-4 11
 0:0:0:0:0:0:0:1 - - [19/Aug/2022:13:14:51 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5403 http-bio-8088-exec-5 27
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:16:10 +0400] "GET /createQuestion.jsp HTTP/1.1" 200 2623 http-bio-8088-exec-1 92
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:16:17 +0400] "GET /showQuizzes.jsp HTTP/1.1" 200 5406 http-bio-8088-exec-2 1011
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:16:19 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5403 http-bio-8088-exec-3 52
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:16:19 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5397 http-bio-8088-exec-4 46
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:17:10 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 - http-bio-8088-exec-5 3
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:17:15 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5397 http-bio-8088-exec-6 35
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:17:20 +0400] "POST /ShowQuizzesServlet HTTP/1.1" 200 5403 http-bio-8088-exec-7 29
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:21:05 +0400] "GET /showQuizzes.jsp HTTP/1.1" 200 5415 http-bio-8088-exec-1 843
+0:0:0:0:0:0:0:1 - - [19/Aug/2022:17:21:07 +0400] "GET /showQuizzes.jsp HTTP/1.1" 200 5415 http-bio-8088-exec-2 26

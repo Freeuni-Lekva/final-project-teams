@@ -15,41 +15,60 @@
 %>
 <%
     int QUIZZES_PER_PAGE = 10;
+    request.getSession().removeAttribute("QUIZ");
 %>
 <%
     int Page = 1;
     if(request.getParameter("page") != null){
         Page = Integer.parseInt((String)request.getParameter("page"));
+    } else {
+        request.getSession().removeAttribute("sort");
+        request.getSession().removeAttribute("search");
     }
-    request.getServletContext().setAttribute("page", Page);
+%>
+<%
+    QuizzesDAO db = (QuizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
+    ResultSet rs;
+
+    if(request.getSession().getAttribute("sort") != null && request.getSession().getAttribute("sort").equals("Sort by creation date")){
+        rs = db.orderByCreationDate((String)request.getSession().getAttribute("search"));
+    } else if(request.getSession().getAttribute("sort") != null && request.getSession().getAttribute("sort").equals("Sort by popularity")){
+        rs = db.orderByPopularity((String)request.getSession().getAttribute("search"));
+    } else {
+        rs = db.allRows();
+    }
+
+    rs.absolute((Page - 1) * 10);
 %>
 <html>
 <head>
     <title>Quizzes</title>
 </head>
     <body>
+        <a href="createQuestion.jsp">Create new quiz</a>
         <form action="ShowQuizzesServlet" method="post" style="text-align: center">
-            <label for="sortingWay">Sort by:</label>
-            <select name="sort" id="sortingWay">
-                <option value="Creation time">Creation time</option>
-                <option value="Popularity">Popularity</option>
-            </select>
-            <br><br>
             <label for="search">Name:</label>
             <input type="text" id="search" name="search" value=""><br>
             <input type="submit" value="Search">
         </form>
+        <table style="width:100%" border="2">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>
+                    <form action="ShowQuizzesServlet" method="post">
+                        <label>Users completed</label>
+                        <input type="submit" name="sort" value="Sort by popularity">
+                    </form>
+                </th>
+                <th>
+                    <form action="ShowQuizzesServlet" method="post">
+                        <label>Creation time</label>
+                        <input type="submit" name="sort" value="Sort by creation date">
+                    </form>
+                </th>
+            </tr>
         <%
-            QuizzesDAO db = (QuizzesDAO) application.getAttribute("QUIZ_DB");
-            ResultSet rs = db.allRows();
-            rs.absolute((Page - 1) * 10);
-            out.println("<table style=\"width:100%\" border=\"2\">");
-            out.println("<tr>\n" +
-                        "    <th>Name</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Users completed</th>" +
-                        "    <th>Creation time</th>" +
-                        "</tr>");
             for(int i = 0; i < QUIZZES_PER_PAGE; i++){
                 if(!rs.next()){
                     break;
@@ -73,9 +92,8 @@
                             "    <td style=\"text-align: center; vertical-align: middle;\">" + creationTime + "</td>" +
                             " </tr>");
             }
-            out.println("</table>");
         %>
-
+        </table>
         <form action="ShowQuizzesServlet" method="post" style="text-align: center">
             <label>Page: </label>
             <input type="submit" name="jumpTo" value="jumpTo" style="display: none" />

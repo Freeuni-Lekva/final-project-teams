@@ -13,8 +13,8 @@
     response.setDateHeader ("Expires", 0);
 %>
 <%
-    if(application.getAttribute("QUIZ") == null){
-        application.setAttribute("QUIZ", new Quiz());
+    if(request.getSession().getAttribute("QUIZ") == null){
+        request.getSession().setAttribute("QUIZ", new Quiz());
     }
 %>
 <%!

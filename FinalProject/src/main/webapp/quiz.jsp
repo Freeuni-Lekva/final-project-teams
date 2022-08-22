@@ -19,12 +19,17 @@
 //    Quiz quiz = (Quiz) application.getAttribute("QUIZ");
     QuizzesDAO quizDB = (QuizzesDAO) application.getAttribute("QUIZ_DB");
     Quiz quiz;
+    if(request.getParameter("id") != null){
+        request.getSession().removeAttribute("QUIZ");
+        request.getSession().removeAttribute("LAST_ID");
+    }
     if(request.getParameter("id") == null){
-        quiz = (Quiz) request.getServletContext().getAttribute("QUIZ");
+        quiz = (Quiz) request.getSession().getAttribute("QUIZ");
     } else {
         int id = Integer.parseInt(request.getParameter("id"));
         quiz = quizDB.getQuiz(id);
-        request.getServletContext().setAttribute("QUIZ", quiz);
+        request.getSession().setAttribute("QUIZ", quiz);
+        request.getSession().setAttribute("QUIZ_ID", "" + id);
     }
 
 
@@ -54,7 +59,7 @@
                         }
                     } else if(quiz.getQuizType().equals(quiz.MULTIPLE_PAGE)){
                         int lastId = Integer.parseInt((String)request.getSession().getAttribute("LAST_ID"));
-                        out.println("<h4>" + lastId + ". </h4>");
+                        out.println("<h4>" + (lastId + 1) + ". </h4>");
                         out.println(list.get(lastId).getQuestion().questionHtmlCode());
                         out.println(list.get(lastId).getAnswer().answerPromptHtmlCode(lastId));
                     }

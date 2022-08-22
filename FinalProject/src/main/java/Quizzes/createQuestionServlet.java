@@ -20,9 +20,14 @@ public class createQuestionServlet extends HttpServlet {
         String chosenType = request.getParameter("questionType");
 //        Quiz q = new Quiz();
 //        request.getServletContext().setAttribute("QUIZ", q);
-        Quiz q = (Quiz) request.getServletContext().getAttribute("QUIZ");
+        Quiz q = (Quiz) request.getSession().getAttribute("QUIZ");
 
-        if("finishedDescriptions".equals(chosenType)){
+        if("finishedDescriptions".equals(chosenType) && q.getQuiz().size() == 0){
+            request.getRequestDispatcher("createQuestionTryAgain.jsp").forward(request, response);
+            return;
+        } else if("finishedDescriptions".equals(chosenType) && (request.getParameter("quizName") != null && !request.getParameter("quizName").equals(""))
+                                                         && request.getParameter("quizDescription") != null
+                                                         && request.getParameter("quizShowStyle") != null){
             String quizName = request.getParameter("quizName");
             String quizDescription = request.getParameter("quizDescription");
             String quizType = request.getParameter("quizShowStyle");
@@ -38,8 +43,11 @@ public class createQuestionServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            request.getServletContext().removeAttribute("QUIZ");
+//            request.getSession().removeAttribute("QUIZ");
             request.getRequestDispatcher("showQuizzes.jsp").forward(request, response);
+            return;
+        }else if("finishedDescriptions".equals(chosenType)){
+            request.getRequestDispatcher("finishCreatingQuizTryAgain.jsp").forward(request, response);
             return;
         }
 
@@ -84,6 +92,9 @@ public class createQuestionServlet extends HttpServlet {
             newAnswer = new pictureResponseAnswer(request.getParameter(pictureResponseAnswer.ANSWER_NAME));
 
             q.addProblem(newQuestion, newAnswer);
+        } else{
+            request.getRequestDispatcher("createQuestionTryAgain.jsp").forward(request, response);
+            return;
         }
 
 //        System.out.println(request.getParameter(questionResponseQuestion.QUESTION_NAME));

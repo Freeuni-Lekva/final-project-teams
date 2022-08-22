@@ -19,7 +19,18 @@ public class QuizzesDAO {
     private static final String quizExists = "SELECT * FROM quizzes q where q.id = ";
 
     private static final String getAllQuizzes = "SELECT * FROM quizzes;";
+
+    private static final String getAllQuizzesSBCDPrefix = "SELECT * FROM quizzes q "; //SBCD - sort by creation date
+    private static final String getAllQuizzesSBCDSuffix = " ORDER BY q.quiz_creation_date DESC;";
+
+    private static final String getAllQuizzesSBPPrefix = "SELECT * FROM quizzes q "; //SBP - sort by popularity
+    private static final String getAllQuizzesSBPSuffix = " ORDER BY q.num_participants_made DESC;";
+
     private static final String getQuizzesCount = "SELECT COUNT(*) FROM quizzes;";
+
+    private static final String searchQuizzesByName = "SELECT * FROM quizzes q WHERE q.name LIKE ";
+
+    private static final String updateQuizPopularity = "UPDATE quizzes SET num_participants_made = num_participants_made + 1 WHERE id =";
 
     private final Connection conn;
     public QuizzesDAO() {
@@ -189,9 +200,24 @@ public class QuizzesDAO {
         }
         return false;
     }
+    public ResultSet orderByPopularity(String name) throws SQLException {
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stm.executeQuery(getAllQuizzesSBPPrefix + " WHERE q.name LIKE '%" + name + "%' " + getAllQuizzesSBPSuffix);
+        return rs;
+    }
+    public ResultSet orderByCreationDate(String name) throws SQLException {
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stm.executeQuery(getAllQuizzesSBCDPrefix + " WHERE q.name LIKE '%" + name + "%' " + getAllQuizzesSBCDSuffix);
+        return rs;
+    }
     public ResultSet allRows() throws SQLException {
         Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = stm.executeQuery(getAllQuizzes);
+        return rs;
+    }
+    public ResultSet searchByName(String name) throws SQLException {
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stm.executeQuery(searchQuizzesByName + "'%" + name + "%';");
         return rs;
     }
     public int getQuizzesCount() throws SQLException {
@@ -201,5 +227,9 @@ public class QuizzesDAO {
             return rs.getInt(1);
         }
         return 0;
+    }
+    public void updateQuizPopularity(int quizID) throws SQLException {
+        Statement stm = conn.createStatement();
+        stm.executeUpdate(updateQuizPopularity + quizID + ";");
     }
 }
