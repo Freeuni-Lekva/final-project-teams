@@ -19,14 +19,14 @@
 //    Quiz quiz = (Quiz) application.getAttribute("QUIZ");
     QuizzesDAO quizDB = (QuizzesDAO) application.getAttribute("QUIZ_DB");
     Quiz quiz;
-    if(request.getParameter("id") != null){
+    if(request.getParameter("QUIZ_ID") != null){
         request.getSession().removeAttribute("QUIZ");
         request.getSession().removeAttribute("LAST_ID");
     }
-    if(request.getParameter("id") == null){
+    if(request.getParameter("QUIZ_ID") == null){
         quiz = (Quiz) request.getSession().getAttribute("QUIZ");
     } else {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("QUIZ_ID"));
         quiz = quizDB.getQuiz(id);
         request.getSession().setAttribute("QUIZ", quiz);
         request.getSession().setAttribute("QUIZ_ID", "" + id);
