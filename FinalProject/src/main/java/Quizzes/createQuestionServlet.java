@@ -1,6 +1,6 @@
 package Quizzes;
 
-import DAOs.QuizzesDao;
+import DAOs.QuizzesDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,22 +18,36 @@ public class createQuestionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String chosenType = request.getParameter("questionType");
-        Quiz q = (Quiz) request.getServletContext().getAttribute("QUIZ");
+//        Quiz q = new Quiz();
+//        request.getServletContext().setAttribute("QUIZ", q);
+        Quiz q = (Quiz) request.getSession().getAttribute("QUIZ");
 
-        if("finishedDescriptions".equals(chosenType)){
+        if("finishedDescriptions".equals(chosenType) && q.getQuiz().size() == 0){
+            request.getRequestDispatcher("createQuestionTryAgain.jsp").forward(request, response);
+            return;
+        } else if("finishedDescriptions".equals(chosenType) && (request.getParameter("quizName") != null && !request.getParameter("quizName").equals(""))
+                                                         && request.getParameter("quizDescription") != null
+                                                         && request.getParameter("quizShowStyle") != null){
             String quizName = request.getParameter("quizName");
             String quizDescription = request.getParameter("quizDescription");
+            String quizType = request.getParameter("quizShowStyle");
+
             q.setName(quizName);
             q.setDescription(quizDescription);
+            q.setQuizType(quizType);
+//            System.out.println(q.getQuizType());
 
-            QuizzesDao db = (QuizzesDao) request.getServletContext().getAttribute("QUIZ_DB");
+            QuizzesDAO db = (QuizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
             try {
                 db.addQuiz(q);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            request.getRequestDispatcher("quiz.jsp").forward(request, response);
+//            request.getSession().removeAttribute("QUIZ");
+            request.getRequestDispatcher("showQuizzes.jsp").forward(request, response);
+            return;
+        }else if("finishedDescriptions".equals(chosenType)){
+            request.getRequestDispatcher("finishCreatingQuizTryAgain.jsp").forward(request, response);
             return;
         }
 
@@ -78,6 +92,9 @@ public class createQuestionServlet extends HttpServlet {
             newAnswer = new pictureResponseAnswer(request.getParameter(pictureResponseAnswer.ANSWER_NAME));
 
             q.addProblem(newQuestion, newAnswer);
+        } else{
+            request.getRequestDispatcher("createQuestionTryAgain.jsp").forward(request, response);
+            return;
         }
 
 //        System.out.println(request.getParameter(questionResponseQuestion.QUESTION_NAME));

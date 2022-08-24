@@ -2,7 +2,7 @@ package UserPage;
 
 import DAOs.AccountDAO;
 import DAOs.MailsDao;
-import DAOs.QuizzesDao;
+import DAOs.QuizzesDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,12 +35,16 @@ public class ChallengeForQuizServlet extends HttpServlet {
         }
         String messageForFriend = request.getParameter("MessageForAddingFriend");
         AccountDAO acc = new AccountDAO();
-        QuizzesDao quizzesDao = new QuizzesDao();
+        QuizzesDAO quizzesDao = new QuizzesDAO();
 
-        if(!quizzesDao.quizExists(quizId)) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
-            dispatcher.forward(request,response);
-            return;
+        try {
+            if(!quizzesDao.quizExists(quizId)) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
+                dispatcher.forward(request,response);
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         try {
