@@ -18,6 +18,8 @@
     <input type="text" placeholder="Username" name="UserNameOfOtherUser" id="UserNameOfOtherUser">
     <input type="text" placeholder="Send Message" name="MessageToUser" id="MessageToUser">
     <input type="submit" value="send message"><br>
+    <p><a href="homepage.jsp">Return to HomePage</a><br></p>
 </form>
+<a href="homepage.jsp">Return to HomePage</a><br>
 </body>
 </html>

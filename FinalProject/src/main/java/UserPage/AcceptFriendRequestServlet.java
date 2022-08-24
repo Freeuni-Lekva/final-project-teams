@@ -34,7 +34,7 @@ public class AcceptFriendRequestServlet extends HttpServlet {
         MailsDao mailsDao = new MailsDao();
         try {
             friendDAO.addFriend(userName, friendRequestSender);
-//            mailsDao.removeMail(mailId);
+            mailsDao.removeMail(mailId);
             RequestDispatcher dispatcher = request.getRequestDispatcher("mails.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e) {

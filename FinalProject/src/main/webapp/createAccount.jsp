@@ -16,7 +16,7 @@
         <form action="CreateAccountServlet" method="post">
             <h2>Register</h2>
             <div><input type="text" placeholder="Name" name="UserName" id="UserName"></div>
-            <div><input type="text" placeholder="Password" name="Password" id ="Password"></div>
+            <div><input type="password" placeholder="Password" name="Password" id ="Password"></div>
             <input type="submit" value="register"><br>
         </form>
     </div>
