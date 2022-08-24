@@ -28,18 +28,19 @@ public class ChallengeForQuizServlet extends HttpServlet {
         String userName = request.getParameter("UserNameOfFriend");
         int quizId = -1;
         try {
-             quizId = Integer.parseInt(request.getParameter("ChallengedQuizId"));
+             quizId = Integer.parseInt(request.getParameter("CHALLENGED_QUIZ_ID"));
         } catch (NumberFormatException ex) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId.jsp");
             dispatcher.forward(request,response);
+            return;
         }
-        String messageForFriend = request.getParameter("MessageForAddingFriend");
+        String messageForFriend = request.getParameter("MessageForQuizChallenge");
         AccountDAO acc = new AccountDAO();
         QuizzesDAO quizzesDao = new QuizzesDAO();
 
         try {
             if(!quizzesDao.quizExists(quizId)) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId.jsp");
                 dispatcher.forward(request,response);
                 return;
             }
@@ -50,11 +51,11 @@ public class ChallengeForQuizServlet extends HttpServlet {
         try {
             if (acc.accountUsernameExists(userName)) {
                 MailsDao mailsDao = new MailsDao();
-                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.CHALLENGE_QUIZ, messageForFriend);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
+                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.CHALLENGE_QUIZ, messageForFriend, quizId);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("startQuiz.jsp?QUIZ_ID=" + quizId);
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("noSuchUser.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("noUserForChallenge.jsp?QUIZ_ID=" + quizId);
                 dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
