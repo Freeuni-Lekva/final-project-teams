@@ -81,7 +81,7 @@
 
                 out.println("<tr>" +
                             "    <td style=\"text-align: center; vertical-align: middle;\">" +
-                            "        <a href=\"quiz.jsp?id=" + id + "\">" +
+                            "        <a href=\"startQuiz.jsp?QUIZ_ID=" + id + "\">" +
                             "          <div style=\"height:100%;width:100%\">" +
                                           name +
                             "          </div>" +
