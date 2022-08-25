@@ -32,6 +32,7 @@
     <title>Friend List</title>
 </head>
 <body>
+  <a href="homepage.jsp">Return to HomePage</a><br>
     <%
       try {
         out.println(createList((String) request.getSession().getAttribute("UserName")));

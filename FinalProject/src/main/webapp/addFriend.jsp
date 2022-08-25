@@ -13,10 +13,11 @@
    </head>
 <body>
  <form action="/addFriendServlet" method="POST" >
-    <h2>Login</h2>
+    <h2>Add Friend</h2>
     <input type="text" placeholder="Username" name="UserNameOfFriend" id="UserNameOfFriend">
            <input type="text" placeholder="Send Message" name="MessageForAddingFriend" id="MessageForAddingFriend">
         <input type="submit" value="add user as friend"><br>
  </form>
+ <a href="homepage.jsp">Return to HomePage</a><br>
 </body>
 </html>

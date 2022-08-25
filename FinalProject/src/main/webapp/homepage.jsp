@@ -40,6 +40,7 @@
     <a href="challengeForQuiz.jsp">Challenge User</a>
     <p> <a href="mails.jsp">Mails</a> </p>
     <p>   <a href="friendList.jsp">Friends</a> </p>
+    <p>   <a href="showQuizzes.jsp">Quizzes</a> </p>
 
 
     <p>Popular Quizzes</p>

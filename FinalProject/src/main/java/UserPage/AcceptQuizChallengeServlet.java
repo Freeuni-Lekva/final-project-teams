@@ -29,9 +29,10 @@ public class AcceptQuizChallengeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = (String) request.getSession().getAttribute("UserName");
         String challengeSender = request.getParameter("ChallengeSender");
+        int quizId = Integer.parseInt(request.getParameter("SentQuizId"));
         FriendDAO friendDAO = new FriendDAO();
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("quiz.jsp?id=" + quizId);
             dispatcher.forward(request, response);
     }
 }

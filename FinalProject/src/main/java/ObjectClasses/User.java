@@ -6,23 +6,27 @@
 package ObjectClasses;
 
 public class User {
-    private final int user_id;
-    private final String userName;
+    private int userId;
+    private String username;
 
-    public User(int user_id, String userName) {
-        this.user_id = user_id;
-        this.userName = userName;
+    public User(int userId, String username) {
+        this.userId = userId;
+        this.username = username;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getUserId() {
-        return user_id;
+        return userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getLink() {
-        return "";
+    public String getUsername() {
+        return username;
     }
 }

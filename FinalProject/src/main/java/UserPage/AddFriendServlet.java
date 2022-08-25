@@ -1,6 +1,7 @@
 package UserPage;
 
 import DAOs.AccountDAO;
+import DAOs.FriendDAO;
 import DAOs.MailsDao;
 
 import javax.servlet.RequestDispatcher;
@@ -25,12 +26,20 @@ public class AddFriendServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("UserNameOfFriend");
         String messageForFriend = request.getParameter("MessageForAddingFriend");
+        String ourUser = (String)request.getSession().getAttribute("UserName");
         AccountDAO acc = new AccountDAO();
+
 
         try {
             if (acc.accountUsernameExists(userName)) {
+                FriendDAO friendDAO = new FriendDAO();
+                if(friendDAO.areFriends(userName, ourUser)) {
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("alreadyFriends.jsp");
+                    dispatcher.forward(request, response);
+                    return;
+                }
                 MailsDao mailsDao = new MailsDao();
-                mailsDao.addMail((String)request.getSession().getAttribute("UserName"), userName, MailsDao.ADD_FRIEND, messageForFriend);
+                mailsDao.addMail(ourUser, userName, MailsDao.ADD_FRIEND, messageForFriend);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
                 dispatcher.forward(request, response);
             } else {
