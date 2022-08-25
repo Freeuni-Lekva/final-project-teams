@@ -20,7 +20,7 @@
                 <input type="text" placeholder="Username" name="UserName" id="UserName">
             </div>
             <div>
-            <input type="text" placeholder="Password" name="Password" id ="Password">
+            <input type="password" placeholder="Password" name="Password" id ="Password">
             </div>
             <input type="submit" value="login"><br>
             <a href="createAccount.jsp">Create New Account</a>

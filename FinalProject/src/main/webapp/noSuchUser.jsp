@@ -13,5 +13,6 @@
 </head>
 <body>
 <h1>Such User Doesn't exist</h1>
+<a href="homepage.jsp">Return to HomePage</a><br>
 </body>
 </html>

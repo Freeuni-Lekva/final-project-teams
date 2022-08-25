@@ -38,8 +38,11 @@
     <a href="addFriend.jsp">Add Friend</a>
     <a href="sendMessage.jsp">Send Message</a>
     <a href="challengeForQuiz.jsp">Challenge User</a>
-    <p> <a href="mails.jsp">Mails</a> </p>
+    <p>   <a href="mails.jsp">Mails</a> </p>
     <p>   <a href="friendList.jsp">Friends</a> </p>
+    <p>   <a href="showQuizzes.jsp">Quizzes</a> </p>
+    <p>   <a href="QuizServletGetHistory.jsp">Quizzes History</a> </p>
+
 
 
     <p>Popular Quizzes</p>
@@ -57,5 +60,10 @@
         <%
         %>
     </h2>
+
+            <form action="/QuizServletGetHistory" method="GET" >
+                <button type="submit">Quiz Stats</button>
+            </form>
+
 </body>
 </html>

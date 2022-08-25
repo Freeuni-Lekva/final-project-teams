@@ -34,6 +34,7 @@
                             .append(mail.getMessage()).append("\n  <form action=\"/acceptQuizChallengeServlet\" method=\"POST\" >\n   " + "<input type = \"hidden\" value =  ")
                             .append(mail.getSender()).append(" name = \"ChallengeSender\" id = \"ChallengeSender\">")
                             .append("<input type = \"hidden\" value =  ").append(mail.getId()).append(" name = \"MailId\" id = \"MailId\"> ")
+                            .append("<input type = \"hidden\" value =  ").append(mail.getQuiz_id()).append(" name = \"SentQuizId\" id = \"SentQuizId\"> ")
                             .append("<input type=\"submit\" value=\"accept\"><br>\n </form>").append("</li>\n");
                 }
             }
@@ -49,7 +50,9 @@
 </head>
 <body>
 <p>Your Received mails</p>
+<a href="homepage.jsp">Return to HomePage</a><br>
 <%
+
     MailsDao mailsDao = new MailsDao();
     List<Mail> lst = mailsDao.getReceivedMailsForUser((String) request.getSession().getAttribute("UserName"));
         out.println(createList(lst));

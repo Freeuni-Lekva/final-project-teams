@@ -65,8 +65,9 @@ public class MailsDao {
         }
     }
 
-    public boolean removeMail(int mail_id) throws SQLException {
-        PreparedStatement prepStmt = this.conn.prepareStatement("DELETE FROM mails WHERE id = mail_id");
-        return true;
+    public void removeMail(int mail_id) throws SQLException {
+        PreparedStatement prepStmt = this.conn.prepareStatement("DELETE FROM mails WHERE id = ?;");
+        prepStmt.setInt(1, mail_id);
+        prepStmt.executeUpdate();
     }
 }

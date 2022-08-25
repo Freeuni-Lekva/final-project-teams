@@ -14,6 +14,7 @@ import java.util.List;
 @WebServlet(name = "QuizServletGetHistory", value = "/QuizServletGetHistory")
 public class QuizHistoryGetServlet extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
 
         quizUserHistoryDao HistoryDao;
@@ -34,28 +35,31 @@ public class QuizHistoryGetServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        request.setAttribute("ResultSet",rs);
+//        request.setAttribute("ResultSet",rs);
 
 
-        List<Integer> Quiz_Ids = new ArrayList<>();
+        List<String> Quiz_Names = new ArrayList<>();
         List<String> Usernames = new ArrayList<>();
-        List<Integer> Scores = new ArrayList<>();
+        List<String> Scores = new ArrayList<>();
         List<String> Times = new ArrayList<>();
+
+
 
         try {
             while (rs.next()) {
      //           System.out.println("nexyt");
-                Quiz_Ids.add(rs.getInt("quiz_id"));
-                Scores.add(rs.getInt("score"));
-                Times.add(rs.getString("quiz_time"));
+                Quiz_Names.add(rs.getString("quiz_name"));
+                Scores.add(rs.getString("score"));
+                //Times.add(rs.getString("quiz_time"));
                 Usernames.add(rs.getString("username"));
+                Times.add(rs.getString("quiz_creation_date"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
 
-        request.setAttribute("Quiz_Ids",Quiz_Ids);
+        request.setAttribute("Quiz_Ids",Quiz_Names);
         request.setAttribute("Scores",Scores);
         request.setAttribute("Times",Times);
         request.setAttribute("Usernames",Usernames);
