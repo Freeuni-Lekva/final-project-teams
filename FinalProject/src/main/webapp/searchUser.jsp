@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="ObjectClasses.User" %><%--
   Created by IntelliJ IDEA.
   User: nutsu
   Date: 8/6/2022
@@ -9,14 +10,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%!
-    public String createList(List<String> lst) {
+    public String createList(List<User> lst) {
         if(lst == null)  {
             return "<h1>There are no such users<h1>";
         }
         StringBuffer buf = new StringBuffer();
         buf.append("<ol start = \"1\">\n");
-        for (String str: lst) {
-            buf.append("<li>").append(str).append("</li>\n");
+        for (User user: lst) {
+            buf.append("<li>").append(user.getUsername()).append("</li>\n");
         }
         buf.append("</ol>");
 
@@ -33,7 +34,7 @@
     <a href="homepage.jsp">Return to HomePage</a><br>
     <p> Matching Users Found</p>
     <%
-       List<String> lst = (List<String>) request.getAttribute("accountsFoundList");
+       List<User> lst = (List<User>) request.getAttribute("accountsFoundList");
         out.println(createList(lst));
     %>
 </body>
