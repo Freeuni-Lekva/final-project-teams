@@ -18,8 +18,52 @@ public class CustomUserStatsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         String Username = null;
 
-        Username = request.getParameter("name");
+
+        String QuizPerPage= request.getParameter("NumOfQuiz");
+        System.out.println(QuizPerPage + "THI IS TVWY");
+
+        int QP = 4;
+        if(QuizPerPage != null){
+            QP = Integer. parseInt(QuizPerPage);
+            System.out.println("NUM BY CHANGE   " + QP);
+        }else if (request.getParameter("currPageNum") != null){
+            QP = Integer.parseInt(request.getParameter("currPageNum"));
+            System.out.println("NUM BY DEF   " + QP);
+        }else{
+            System.out.println("NUM BY DEFDEF   " + QP);
+            QP = 4;
+        }
+
+
+        if(request.getParameter("name") != null){
+            Username = request.getParameter("name");
+        }
+        else {
+            Username = request.getParameter("currUser");
+        }
+        request.setAttribute("User",Username);
         System.out.println(Username);
+
+
+        Integer Page = 0;
+        try {
+            Page = Integer.parseInt(request.getParameter("currPage"));
+            System.out.println(" GET AT -----  " +  Page);
+
+        } catch (NumberFormatException e) {
+            Page = 1;
+        }
+
+        if(request.getParameter("prev") != null ) {
+            Page--;
+        } else if (request.getParameter("next") != null) {
+            Page++;
+        } else if (request.getParameter("jumpTo") != null) {
+            Page = Integer.valueOf(request.getParameter("jump"));
+        }
+        request.setAttribute("page", Page);
+        request.setAttribute("Num",QP);
+        System.out.println(" SET AT -----  " +  Page);
 
         quizUserHistoryDao HistoryDao;
         try {
@@ -41,8 +85,20 @@ public class CustomUserStatsServlet extends HttpServlet {
         List<String> Scores = new ArrayList<>();
         List<String> Times = new ArrayList<>();
 
+
+        System.out.println("BEFORE TRY OF ABSOLUTE");
         try {
-            while (rs.next()) {
+            rs.absolute((Page-1)*QP);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        int count=QP;
+
+        try {
+            while (rs.next() && count>0) {
+                count--;
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
                 Usernames.add(rs.getString("username"));

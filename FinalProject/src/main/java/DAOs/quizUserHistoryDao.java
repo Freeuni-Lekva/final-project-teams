@@ -70,7 +70,9 @@ public class quizUserHistoryDao implements quizHistoryDao{
     @Override
     public ResultSet getStats() throws SQLException {
 
-        PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH;");
+        PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH;",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
 
         ResultSet rs = prepStmt.executeQuery();
 
@@ -81,7 +83,9 @@ public class quizUserHistoryDao implements quizHistoryDao{
     public ResultSet getQuizStats(String quiz_name) throws SQLException {
 
         PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH " +
-                "where QH.quiz_name = ?;");
+                "where QH.quiz_name = ?;",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
 
         prepStmt.setString(1, quiz_name);
 
@@ -94,7 +98,9 @@ public class quizUserHistoryDao implements quizHistoryDao{
     public ResultSet getUserStatsByTime(String Username) throws SQLException {
 
         PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH " +
-                "where QH.username = ? order by quiz_creation_date;");
+                "where QH.username = ? order by quiz_creation_date;",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
 
         prepStmt.setString(1, Username);
 
@@ -108,7 +114,9 @@ public class quizUserHistoryDao implements quizHistoryDao{
     public ResultSet getQuizStatsSortByTime(String quiz_name) throws SQLException {
 
         PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH " +
-                "where QH.quiz_name = ? order by quiz_creation_date;");
+                "where QH.quiz_name = ? order by quiz_creation_date;",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
 
         prepStmt.setString(1, quiz_name);
 
@@ -121,7 +129,9 @@ public class quizUserHistoryDao implements quizHistoryDao{
     public ResultSet getQuizStatsSortByScore(String quiz_name) throws SQLException {
 
         PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH " +
-                "where QH.quiz_name = ? order by score;");
+                "where QH.quiz_name = ? order by score;",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
 
         prepStmt.setString(1, quiz_name);
 

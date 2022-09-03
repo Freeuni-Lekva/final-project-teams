@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<% Integer Page =  (Integer) request.getAttribute("page"); %>
+<% Integer PageNum =  (Integer) request.getAttribute("Num"); %>
+<% String name =  (String) request.getAttribute("User");%>
 <% String UN = (String) request.getAttribute("Username"); %>
 <% ArrayList<String> Q_IDS = (ArrayList) request.getAttribute("Quiz_Ids"); %>
 <% ArrayList<String> USERS = (ArrayList) request.getAttribute("Usernames"); %>
@@ -54,16 +57,44 @@
                     %>
 
         </table>
+
+                                <form action="CustomUserStatsServlet" method="get" style="text-align: center">
+                                    <label>Page: </label>
+                                    <input type="submit" name="jumpTo" value="jumpTo" style="display: none" />
+                                    <input type="hidden" name="currPage" value=<%=Page%>>
+                                    <input type="hidden" name="currUser" value=<%=name%>>
+                                    <input type="hidden" name="currPageNum" value=<%=PageNum%>>
+                                    <input type="submit" id="prev" name="prev" value="prev">
+                                    <input type="text" id="jump" name="jump" value="<%out.println(Page);%>"  style="text-align: center">
+                                    <input type="submit" id="next" name="next" value="next">
+                                </form>
+
+
     </div>
 
     </div>
 
         <form action="/CustomUserStatsServlet" method="GET" >
-            <label for="name">Custom Username</label>
+            <label for="quiz_name">Change Number Of Quizzes per Page </label>
+            <input type="text" name="NumOfQuiz" value="${NumOfQuiz}" /><br/>
+            <input type="hidden" name="currUser" value=<%=name%>>
+            <button type="submit">Change</button>
+        </form>
+
+        <form action="/CustomUserStatsServlet" method="GET" >
+            <label for="name">Search Stats Of Custom Username   </label>
             <input type="text" name="name" value="${name}" /><br/>
 
             <button type="submit">Quiz Stats</button>
         </form>
+
+        <form action="/CustomQuizStatsServlet" method="GET" >
+            <label for="quiz_name">Search Stats Of Custom Quiz Name </label>
+            <input type="text" name="quiz_name" value="${quiz_name}" /><br/>
+
+            <button type="submit">Quiz Stats</button>
+        </form>
+
 
 </body>
 </html>

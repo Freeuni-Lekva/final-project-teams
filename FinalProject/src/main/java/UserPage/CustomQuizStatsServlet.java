@@ -18,6 +18,44 @@ public class CustomQuizStatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
 
+        String QuizPerPage= request.getParameter("NumOfQuiz");
+        System.out.println(QuizPerPage + "THI IS TVWY");
+
+        int QP = 4;
+        if(QuizPerPage != null){
+            QP = Integer. parseInt(QuizPerPage);
+            System.out.println("NUM BY CHANGE   " + QP);
+        }else if (request.getParameter("currPageNum") != null){
+            QP = Integer.parseInt(request.getParameter("currPageNum"));
+            System.out.println("NUM BY DEF   " + QP);
+        }else{
+            System.out.println("NUM BY DEFDEF   " + QP);
+            QP = 4;
+        }
+
+        request.setAttribute("Num",QP);
+
+
+
+        Integer Page = 0;
+        try {
+            Page = Integer.parseInt(request.getParameter("currPage"));
+            System.out.println(" GET AT -----  " +  Page);
+
+        } catch (NumberFormatException e) {
+            Page = 1;
+        }
+
+        if(request.getParameter("prev") != null ) {
+            Page--;
+        } else if (request.getParameter("next") != null) {
+            Page++;
+        } else if (request.getParameter("jumpTo") != null) {
+            Page = Integer.valueOf(request.getParameter("jump"));
+        }
+        request.setAttribute("page", Page);
+        System.out.println(" SET AT -----  " +  Page);
+
         quizUserHistoryDao HistoryDao;
         try {
             HistoryDao = new quizUserHistoryDao();
@@ -25,7 +63,7 @@ public class CustomQuizStatsServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        String Quiz_Id;
+        String Quiz_Id = null;
         int sort;
         String MaxS;
 
@@ -35,39 +73,40 @@ public class CustomQuizStatsServlet extends HttpServlet {
             sort = 0;
         }
 
+        if(request.getParameter("quiz_name")!=null){
         Quiz_Id = request.getParameter("quiz_name");
+        }else{
+        Quiz_Id = request.getParameter("currQuiz");
+        }
+        request.setAttribute("curQuizName",Quiz_Id);
 
         //Quiz_Id=12;
         System.out.println(Quiz_Id);
 
         ResultSet rs = null;
 
-
+/*
         try{
             rs = HistoryDao.getQuizStatsSortByTime(Quiz_Id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        /*
+*/
         try {
             switch (sort){
               case 0:
-                    rs = HistoryDao.getQuizStats(Integer.parseInt(Quiz_Id));
-              break;
+                    rs = HistoryDao.getQuizStats(Quiz_Id);
+                    System.out.println("SORTING BY DEFFFF");
+                  break;
               case 1:
-                    rs = HistoryDao.getQuizStatsSortByTime(Quiz_Id);
+                    rs = HistoryDao.getQuizStatsSortByScore(Quiz_Id);
                 break;
-                case 2:
-                    rs = HistoryDao.getQuizStatsSortByScore(Integer.parseInt(Quiz_Id));
-                break;
-                default:
-
+              default:
+                rs = HistoryDao.getQuizStatsSortByTime(Quiz_Id);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        */
 
 
         List<String> Quiz_Names = new ArrayList<>();
@@ -76,8 +115,20 @@ public class CustomQuizStatsServlet extends HttpServlet {
         List<String> Times = new ArrayList<>();
         String MaxQuizScore = null;
 
+
+
+
         try {
-            while (rs.next()) {
+            rs.absolute((Page-1)*QP);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        int count = QP;
+
+
+        try {
+            while (rs.next() && count>0) {
+                count--;
                 //           System.out.println("nexyt");
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
@@ -115,6 +166,7 @@ public class CustomQuizStatsServlet extends HttpServlet {
         request.setAttribute("Times",Times);
         request.setAttribute("Usernames",Usernames);
         request.setAttribute("maxxx",MaxQuizScore);
+
 
 
         /*

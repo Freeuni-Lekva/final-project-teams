@@ -17,12 +17,38 @@ public class QuizHistoryGetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
 
+        /*
+        try {
+            int PageZ = Integer.parseInt(request.getParameter("currPageNum"));
+            System.out.println(" GET AT ----- ZZZZZZZZZZZ " +  PageZ);
+
+        } catch (NumberFormatException e) {
+            int PageZ = 1;
+        }*/
+
+        String QuizPerPage= request.getParameter("NumOfQuiz");
+
+        int QP = 4;
+        if(QuizPerPage != null){
+            QP = Integer. parseInt(QuizPerPage);
+            System.out.println("NUM BY CHANGE   " + QP);
+        }else if (request.getParameter("currPageNum") != null){
+            QP = Integer.parseInt(request.getParameter("currPageNum"));
+            System.out.println("NUM BY DEF   " + QP);
+        }else{
+            System.out.println("NUM BY DEFDEF   " + QP);
+            QP = 4;
+        }
+
+        System.out.println(QP + "  SET AS THIS IS PageNum");
+
         quizUserHistoryDao HistoryDao;
         try {
             HistoryDao = new quizUserHistoryDao();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
         //int Quiz_Id;
         //int Quiz_Id = request.getIntHeader("Quiz_Id");
@@ -45,9 +71,40 @@ public class QuizHistoryGetServlet extends HttpServlet {
 
 
 
+
+        Integer Page = 0;
         try {
-            while (rs.next()) {
-     //           System.out.println("nexyt");
+            Page = Integer.parseInt(request.getParameter("currPage"));
+            System.out.println(" GET AT -----  " +  Page);
+
+        } catch (NumberFormatException e) {
+            Page = 1;
+        }
+        //request.setAttribute("Page",Page);
+
+        if(request.getParameter("prev") != null ) {
+        Page--;
+        } else if (request.getParameter("next") != null) {
+        Page++;
+        } else if (request.getParameter("jumpTo") != null) {
+            Page = Integer.valueOf(request.getParameter("jump"));
+        }
+        request.setAttribute("page", Page);
+        request.setAttribute("Num",QP);
+        System.out.println(" SET AT -----  " +  Page);
+
+        try {
+            rs.absolute((Page-1)*QP);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        int count=QP;
+        try {
+            while (rs.next() && count>0) {
+                count--;
+                //           System.out.println("nexyt");
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
                 //Times.add(rs.getString("quiz_time"));
