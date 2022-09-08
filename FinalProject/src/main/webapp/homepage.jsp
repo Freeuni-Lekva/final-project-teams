@@ -26,22 +26,36 @@
 <head>
     <title>Home Page</title>
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
+    <link rel="stylesheet" href="homeStyle.css"/>
 </head>
 <body>
-    <form action="/SearchUserServlet" method="GET" >
-        <input type="text" placeholder="User Name" name="UserName" id="UserName">
-        <input type="submit" value="Search"><br>
-    </form>
+    <div id="usernameSearch">
+        <form action="/SearchUserServlet" method="GET" >
+            <input type="text" placeholder="User Name" name="UserName" id="UserName">
+            <input type="submit" value="Search"><br>
+        </form>
+    </div>
 
     <h1><b>Home Page</b></h1>
 
-    <a href="addFriend.jsp">Add Friend</a>
-    <a href="sendMessage.jsp">Send Message</a>
-    <a href="challengeForQuiz.jsp">Challenge User</a>
-    <p> <a href="mails.jsp">Mails</a> </p>
-    <p>   <a href="friendList.jsp">Friends</a> </p>
-    <p>   <a href="showQuizzes.jsp">Quizzes</a> </p>
-
+    <div id="profileDropdown">
+        <small>Logged in as:</small>
+        <br>
+        <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
+        <div id="dropdownContent" class="dropdownContent">
+            <a href="addFriend.jsp">Add Friend</a>
+            <br>
+            <a href="sendMessage.jsp">Send Message</a>
+            <br>
+            <a href="challengeForQuiz.jsp">Challenge User</a>
+            <br>
+            <a href="mails.jsp">Mails</a>
+            <br>
+            <a href="friendList.jsp">Friends</a>
+            <br>
+            <a href="showQuizzes.jsp">Quizzes</a>
+        </div>
+    </div>
 
     <p>Popular Quizzes</p>
         <h2>
@@ -58,5 +72,7 @@
         <%
         %>
     </h2>
+
+    <script src="homepageFunctions.js"></script>
 </body>
 </html>
