@@ -39,7 +39,7 @@
     <h1><b>Home Page</b></h1>
 
     <div id="profileDropdown">
-        <small>Logged in as:</small>
+        Logged in as:
         <br>
         <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
         <div id="dropdownContent" class="dropdownContent">
