@@ -29,33 +29,32 @@
     <link rel="stylesheet" href="homeStyle.css"/>
 </head>
 <body>
+    <h1><b>Home Page</b></h1>
+
     <div id="usernameSearch">
         <form action="/SearchUserServlet" method="GET" >
-            <input type="text" placeholder="User Name" name="UserName" id="UserName">
+            <input id="searchField" type="text" placeholder="User Name" name="UserName" id="UserName">
             <input type="submit" value="Search"><br>
         </form>
     </div>
-
-    <h1><b>Home Page</b></h1>
 
     <div id="profileDropdown">
         Logged in as:
         <br>
         <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
         <div id="dropdownContent" class="dropdownContent">
-            <a href="addFriend.jsp">Add Friend</a>
-            <br>
-            <a href="sendMessage.jsp">Send Message</a>
-            <br>
-            <a href="challengeForQuiz.jsp">Challenge User</a>
-            <br>
-            <a href="mails.jsp">Mails</a>
-            <br>
-            <a href="friendList.jsp">Friends</a>
-            <br>
-            <a href="showQuizzes.jsp">Quizzes</a>
+            <ul>
+                <li><a href="addFriend.jsp">Add Friend</a></li>
+                <li><a href="sendMessage.jsp">Send Message</a></li>
+                <li><a href="challengeForQuiz.jsp">Challenge User</a></li>
+                <li><a href="mails.jsp">Mails</a></li>
+                <li><a href="friendList.jsp">Friends</a></li>
+                <li><a href="showQuizzes.jsp">Quizzes</a></li>
+            </ul>
         </div>
     </div>
+
+    <a href="createQuestion.jsp">Create a Quiz</a>
 
     <p>Popular Quizzes</p>
         <h2>
