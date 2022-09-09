@@ -58,12 +58,10 @@
     <div id="quizLinks">
         <a href="createQuestion.jsp" id="createQuestion">Create a Quiz</a>
         <a href="showQuizzes.jsp" id="showQuizzes">Show Quizzes</a>
-        <a href="quizResultPage.jsp" id="quizStats">Quiz Stats</a>
+        <form action="/QuizServletGetHistory" method="GET">
+            <a href="QuizServletGetHistory.jsp" onclick='this.parentNode.submit(); return false;' id="quizStats">Quiz Stats</a>
+        </form>
     </div>
-
-    <form action="/QuizServletGetHistory" method="GET" >
-        <button type="submit">Quiz Stats</button>
-    </form>
 
     <script src="homepageFunctions.js"></script>
 </body>
