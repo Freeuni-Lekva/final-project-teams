@@ -1,5 +1,7 @@
 package DAOs;
 
+import ObjectClasses.User;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -50,17 +52,17 @@ public class AccountDAO {
         return false;
     }
 
-    // amaze ar vici vabshe
-    public List<String> searchAccountsByUsername(String username) throws SQLException {
+    public List<User> searchAccountsByUsername(String username) throws SQLException {
         PreparedStatement prepStmt = conn.prepareStatement("SELECT username FROM accounts WHERE " +
                 "username LIKE ?;");
         prepStmt.setString(1, username + "%");
         ResultSet rs = prepStmt.executeQuery();
 
-        List<String> accounts = new ArrayList<>();
+        List<User> accounts = new ArrayList<>();
 
         while(rs.next()){
-            accounts.add(rs.getString("username"));
+            User user = new User(rs.getInt("user_id"), rs.getString("username"));
+            accounts.add(user);
         }
 
         return accounts;

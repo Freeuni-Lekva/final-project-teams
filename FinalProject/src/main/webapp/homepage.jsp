@@ -26,24 +26,36 @@
 <head>
     <title>Home Page</title>
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
+    <link rel="stylesheet" href="homeStyle.css"/>
 </head>
 <body>
-    <form action="/SearchUserServlet" method="GET" >
-        <input type="text" placeholder="User Name" name="UserName" id="UserName">
-        <input type="submit" value="Search"><br>
-    </form>
-
     <h1><b>Home Page</b></h1>
 
-    <a href="addFriend.jsp">Add Friend</a>
-    <a href="sendMessage.jsp">Send Message</a>
-    <a href="challengeForQuiz.jsp">Challenge User</a>
-    <p>   <a href="mails.jsp">Mails</a> </p>
-    <p>   <a href="friendList.jsp">Friends</a> </p>
-    <p>   <a href="showQuizzes.jsp">Quizzes</a> </p>
-    <p>   <a href="QuizServletGetHistory.jsp">Quizzes History</a> </p>
 
+    <div id="usernameSearch">
+        <form action="/SearchUserServlet" method="GET" >
+            <input id="searchField" type="text" placeholder="User Name" name="UserName" id="UserName">
+            <input type="submit" value="Search"><br>
+        </form>
+    </div>
 
+    <div id="profileDropdown">
+        Logged in as:
+        <br>
+        <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
+        <div id="dropdownContent" class="dropdownContent">
+            <ul>
+                <li><a href="addFriend.jsp">Add Friend</a></li>
+                <li><a href="sendMessage.jsp">Send Message</a></li>
+                <li><a href="challengeForQuiz.jsp">Challenge User</a></li>
+                <li><a href="mails.jsp">Mails</a></li>
+                <li><a href="friendList.jsp">Friends</a></li>
+                <li><a href="showQuizzes.jsp">Quizzes</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="createQuestion.jsp">Create a Quiz</a>
 
     <p>Popular Quizzes</p>
         <h2>
@@ -61,9 +73,11 @@
         %>
     </h2>
 
+
+    <script src="homepageFunctions.js"></script>
+
             <form action="/QuizServletGetHistory" method="GET" >
                 <button type="submit">Quiz Stats</button>
             </form>
-
 </body>
 </html>
