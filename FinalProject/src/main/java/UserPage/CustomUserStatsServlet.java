@@ -11,22 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "QuizServletGetHistory", value = "/QuizServletGetHistory")
-public class QuizHistoryGetServlet extends HttpServlet {
+@WebServlet(name = "CustomUserStatsServlet", value = "/CustomUserStatsServlet")
+public class CustomUserStatsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
+        String Username = null;
 
-        /*
-        try {
-            int PageZ = Integer.parseInt(request.getParameter("currPageNum"));
-            System.out.println(" GET AT ----- ZZZZZZZZZZZ " +  PageZ);
-
-        } catch (NumberFormatException e) {
-            int PageZ = 1;
-        }*/
 
         String QuizPerPage= request.getParameter("NumOfQuiz");
+        System.out.println(QuizPerPage + "THI IS TVWY");
 
         int QP = 4;
         if(QuizPerPage != null){
@@ -40,36 +34,15 @@ public class QuizHistoryGetServlet extends HttpServlet {
             QP = 4;
         }
 
-        System.out.println(QP + "  SET AS THIS IS PageNum");
 
-        quizUserHistoryDao HistoryDao;
-        try {
-            HistoryDao = new quizUserHistoryDao();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(request.getParameter("name") != null){
+            Username = request.getParameter("name");
         }
-
-
-        //int Quiz_Id;
-        //int Quiz_Id = request.getIntHeader("Quiz_Id");
-        //Quiz_Id=12;
-
-        ResultSet rs;
-
-        try {
-            rs = HistoryDao.getStats();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        else {
+            Username = request.getParameter("currUser");
         }
-//        request.setAttribute("ResultSet",rs);
-
-
-        List<String> Quiz_Names = new ArrayList<>();
-        List<String> Usernames = new ArrayList<>();
-        List<String> Scores = new ArrayList<>();
-        List<String> Times = new ArrayList<>();
-
-
+        request.setAttribute("User",Username);
+        System.out.println(Username);
 
 
         Integer Page = 0;
@@ -80,12 +53,11 @@ public class QuizHistoryGetServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             Page = 1;
         }
-        //request.setAttribute("Page",Page);
 
         if(request.getParameter("prev") != null ) {
-        Page--;
+            Page--;
         } else if (request.getParameter("next") != null) {
-        Page++;
+            Page++;
         } else if (request.getParameter("jumpTo") != null) {
             Page = Integer.valueOf(request.getParameter("jump"));
         }
@@ -93,6 +65,28 @@ public class QuizHistoryGetServlet extends HttpServlet {
         request.setAttribute("Num",QP);
         System.out.println(" SET AT -----  " +  Page);
 
+        quizUserHistoryDao HistoryDao;
+        try {
+            HistoryDao = new quizUserHistoryDao();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        ResultSet rs = null;
+
+        try {
+            rs = HistoryDao.getUserStatsByTime(Username);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<String> Quiz_Names = new ArrayList<>();
+        List<String> Usernames = new ArrayList<>();
+        List<String> Scores = new ArrayList<>();
+        List<String> Times = new ArrayList<>();
+
+
+        System.out.println("BEFORE TRY OF ABSOLUTE");
         try {
             rs.absolute((Page-1)*QP);
         } catch (SQLException e) {
@@ -101,13 +95,12 @@ public class QuizHistoryGetServlet extends HttpServlet {
 
 
         int count=QP;
+
         try {
             while (rs.next() && count>0) {
                 count--;
-                //           System.out.println("nexyt");
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
-                //Times.add(rs.getString("quiz_time"));
                 Usernames.add(rs.getString("username"));
                 Times.add(rs.getString("quiz_creation_date"));
             }
@@ -115,14 +108,12 @@ public class QuizHistoryGetServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
         request.setAttribute("Quiz_Ids",Quiz_Names);
         request.setAttribute("Scores",Scores);
         request.setAttribute("Times",Times);
         request.setAttribute("Usernames",Usernames);
+        request.setAttribute("Username,",Username);
 
-
-        request.getRequestDispatcher("QuizServletGetHistory.jsp").forward(request, response);
+        request.getRequestDispatcher("CustomUserStats.jsp").forward(request, response);
     }
-
 }

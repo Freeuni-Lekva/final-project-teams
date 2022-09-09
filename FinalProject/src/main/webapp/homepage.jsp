@@ -31,6 +31,7 @@
 <body>
     <h1><b>Home Page</b></h1>
 
+
     <div id="usernameSearch">
         <form action="/SearchUserServlet" method="GET" >
             <input id="searchField" type="text" placeholder="User Name" name="UserName" id="UserName">
@@ -72,6 +73,11 @@
         %>
     </h2>
 
+
     <script src="homepageFunctions.js"></script>
+
+            <form action="/QuizServletGetHistory" method="GET" >
+                <button type="submit">Quiz Stats</button>
+            </form>
 </body>
 </html>
