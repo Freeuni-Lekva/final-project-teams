@@ -55,29 +55,16 @@
         </div>
     </div>
 
-    <a href="createQuestion.jsp">Create a Quiz</a>
+    <div id="quizLinks">
+        <a href="createQuestion.jsp" id="createQuestion">Create a Quiz</a>
+        <a href="showQuizzes.jsp" id="showQuizzes">Show Quizzes</a>
+        <a href="quizResultPage.jsp" id="quizStats">Quiz Stats</a>
+    </div>
 
-    <p>Popular Quizzes</p>
-        <h2>
-            <%
-            %>
-        </h2>
-    <p>Recent Quizzes Activity</p>
-    <h2>
-        <%
-        %>
-    </h2>
-    <p>Recently Created Quizzes</p>
-    <h2>
-        <%
-        %>
-    </h2>
-
+    <form action="/QuizServletGetHistory" method="GET" >
+        <button type="submit">Quiz Stats</button>
+    </form>
 
     <script src="homepageFunctions.js"></script>
-
-            <form action="/QuizServletGetHistory" method="GET" >
-                <button type="submit">Quiz Stats</button>
-            </form>
 </body>
 </html>

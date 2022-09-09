@@ -85,26 +85,53 @@ div ul{
     display:block;
 }
 
-a[href="createQuestion.jsp"]{
-    font-family: Bookman, URW Bookman L, serif;
-    display: inline-block;
+#quizLinks {
+    display: flex;
+    flex-wrap: wrap;
     position: absolute;
-    right: 0px;
+    top: 200px;
+    left: 215px;
+}
+
+#quizLinks a {
+    font-family: Bookman, URW Bookman L, serif;
     margin: 20px;
     border: 2px solid black;
     border-radius:20px;
     text-align: center;
-    width: 175px;
-    height: 50px;
-    padding-top: 5px;
+    width: 225px;
+    height: 100px;
+    padding-top: 15px;
     padding-bottom: 100px;
     text-decoration: none;
     color: white;
     background-image: url("https://clipartart.com/images/a-lot-of-books-clipart-6.png");
     background-size: cover;
+}
+
+#createQuestion{
     background-color: #008ad5;
 }
 
-a[href="createQuestion.jsp"]:hover{
-    background-color: #006ed0;
+#createQuestion:hover{
+    background-color: #006ed0;;
 }
+
+#showQuizzes{
+    background-color: #f40034;
+}
+
+#showQuizzes:hover{
+    background-color: #e40132;
+}
+
+#quizStats{
+    background-color: #01e41a;
+}
+
+#quizStats:hover{
+    background-color: #01d517;
+}
+
+
+
