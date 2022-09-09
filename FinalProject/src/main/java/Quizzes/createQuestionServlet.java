@@ -39,7 +39,7 @@ public class createQuestionServlet extends HttpServlet {
 
             QuizzesDAO db = (QuizzesDAO) request.getServletContext().getAttribute("QUIZ_DB");
             try {
-                db.addQuiz(q);
+                db.addQuiz(q,(String) request.getSession().getAttribute("UserName"));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

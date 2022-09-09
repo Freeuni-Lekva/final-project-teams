@@ -44,14 +44,14 @@ CREATE TABLE quizzes(
                         description VARCHAR(255),
                         quiz_type VARCHAR(255),
                         num_participants_made INT,
-                        quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP
+                        quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP,
+                        author VARCHAR(256)
 );
 CREATE TABLE quizHistory(
-                            id INT PRIMARY KEY AUTO_INCREMENT,
-                            quiz_id INT NOT NULL,
-                            user_id INT NOT NULL,
-                            score INT NOT NULL,
-                            quiz_time VARCHAR(4000) NOT NULL
+                         quiz_name VARCHAR(256),
+                         username VARCHAR(256),
+                         score VARCHAR(256),
+                         quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP
 );
 CREATE TABLE question_response(
                                   quiz_id INT,

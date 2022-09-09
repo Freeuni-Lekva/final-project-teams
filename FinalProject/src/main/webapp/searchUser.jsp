@@ -17,7 +17,7 @@
         StringBuffer buf = new StringBuffer();
         buf.append("<ol start = \"1\">\n");
         for (User user: lst) {
-            buf.append("<li>").append(user.getUsername()).append("</li>\n");
+            buf.append("<li>").append("<a href=\"VisitProfile.jsp\">").append(user.getUsername()).append("</a>").append("</li>\n");
         }
         buf.append("</ol>");
 

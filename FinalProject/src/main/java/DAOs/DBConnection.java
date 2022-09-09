@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DBConnection {
     private static final Connection con;
 
-    private static final String DATABASENAME = "test";
+    private static final String DATABASENAME = "VSTB";
     private static final String USER = "root";
-    private static final String PASSWORD = "rkinabetoni";
+    private static final String PASSWORD = "1234";
 
     static {
         try {
