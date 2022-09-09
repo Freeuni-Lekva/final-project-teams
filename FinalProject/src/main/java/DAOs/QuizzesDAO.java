@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class QuizzesDAO {
-    private static final String addQuizCommand = "INSERT INTO quizzes (name, description, quiz_type, num_participants_made) VALUES (?, ?, ?, ?);";
+    private static final String addQuizCommand = "INSERT INTO quizzes (name, description, quiz_type, num_participants_made,author) VALUES (?, ?, ?, ?, ?);";
 
     private static final String addQuestionResponseCommand = "INSERT INTO question_response (quiz_id, question, answer) VALUES (?, ?, ?);";
     private static final String addPictureResponseCommand = "INSERT INTO picture_response (quiz_id, url, answer) VALUES (?, ?, ?);";
@@ -81,12 +81,13 @@ public class QuizzesDAO {
             prepStmt.executeUpdate();
         }
     }
-    public void addQuiz(Quiz quiz) throws SQLException {
+    public void addQuiz(Quiz quiz, String author) throws SQLException {
         PreparedStatement prepStmt = conn.prepareStatement(addQuizCommand);
         prepStmt.setString(1, quiz.getName());
         prepStmt.setString(2, quiz.getDescription());
         prepStmt.setString(3, quiz.getQuizType());
         prepStmt.setInt(4, 0);
+        prepStmt.setString(5, author);
         prepStmt.executeUpdate();
 
         int quizId = getMaxId();
@@ -232,4 +233,25 @@ public class QuizzesDAO {
         Statement stm = conn.createStatement();
         stm.executeUpdate(updateQuizPopularity + quizID + ";");
     }
+
+    public ResultSet GetQuizzesCountByAuthor(String author) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "select count(name) from quizzes where author = ?;"
+        );
+
+        prepStmt.setString(1, author);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs;
+    }
+
+    public ResultSet GetQuizzesByAuthor(String author) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "select * from quizzes where author = ?;"
+        );
+
+        prepStmt.setString(1, author);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs;
+    }
+
 }

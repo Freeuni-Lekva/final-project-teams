@@ -131,6 +131,7 @@ public class quizUserHistoryDao implements quizHistoryDao{
         PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM quizHistory QH " +
                 "where QH.quiz_name = ? order by score;",
                 ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);
 
         prepStmt.setString(1, quiz_name);
@@ -161,6 +162,17 @@ public class quizUserHistoryDao implements quizHistoryDao{
     @Override
     public ResultSet getUserStatsDistinct(String Username) throws SQLException{
         return null;
+    }
+
+    @Override
+    public ResultSet getDistinctQuizCount(String Username) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+        "SELECT  COUNT(distinct quiz_name) FROM quizHistory WHERE username = ?"
+        );
+
+        prepStmt.setString(1, Username);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs;
     }
 
 }

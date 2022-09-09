@@ -61,6 +61,7 @@
                         <input type="submit" name="sort" value="Sort by popularity">
                     </form>
                 </th>
+                <th> Quiz Author </th>
                 <th>
                     <form action="ShowQuizzesServlet" method="post">
                         <label>Creation time</label>
@@ -78,6 +79,8 @@
                 String description = rs.getString(3);
                 int num_participants = rs.getInt(5);
                 String creationTime = rs.getString(6);
+                String author = rs.getString(7);
+
 
                 out.println("<tr>" +
                             "    <td style=\"text-align: center; vertical-align: middle;\">" +
@@ -89,6 +92,7 @@
                             "    </td>" +
                             "    <td style=\"text-align: center; vertical-align: middle;\">" + description + "</td>" +
                             "    <td style=\"text-align: center; vertical-align: middle;\">" + num_participants + "</td>" +
+                            "    <td style=\"text-align: center; vertical-align: middle;\">" + author + "</td>" +
                             "    <td style=\"text-align: center; vertical-align: middle;\">" + creationTime + "</td>" +
                             " </tr>");
             }

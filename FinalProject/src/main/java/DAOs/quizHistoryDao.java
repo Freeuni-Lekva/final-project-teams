@@ -19,4 +19,5 @@ public interface quizHistoryDao {
     public ResultSet getUserStatsByTime(String Username) throws SQLException;
     public ResultSet getUserStatsByScore(String Username) throws SQLException;
     public ResultSet getUserStatsDistinct(String Username) throws SQLException;
+    public ResultSet getDistinctQuizCount(String Username) throws SQLException;
     }
