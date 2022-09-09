@@ -52,6 +52,7 @@ CREATE TABLE quizHistory(
                             user_id INT NOT NULL,
                             score INT NOT NULL,
                             quiz_time VARCHAR(4000) NOT NULL
+                            quiz_creation_date DATETIME DEFAULT   CURRENT_TIMESTAMP
 );
 CREATE TABLE question_response(
                                   quiz_id INT,
