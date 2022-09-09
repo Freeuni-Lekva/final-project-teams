@@ -26,44 +26,45 @@
 <head>
     <title>Home Page</title>
     <link rel = "icon" href = "https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg"/>
+    <link rel="stylesheet" href="homeStyle.css"/>
 </head>
 <body>
-    <form action="/SearchUserServlet" method="GET" >
-        <input type="text" placeholder="User Name" name="UserName" id="UserName">
-        <input type="submit" value="Search"><br>
-    </form>
-
     <h1><b>Home Page</b></h1>
 
-    <a href="addFriend.jsp">Add Friend</a>
-    <a href="sendMessage.jsp">Send Message</a>
-    <a href="challengeForQuiz.jsp">Challenge User</a>
-    <p>   <a href="mails.jsp">Mails</a> </p>
-    <p>   <a href="friendList.jsp">Friends</a> </p>
-    <p>   <a href="showQuizzes.jsp">Quizzes</a> </p>
-    <p>   <a href="QuizServletGetHistory.jsp">Quizzes History</a> </p>
 
+    <div id="usernameSearch">
+        <form action="/SearchUserServlet" method="GET" >
+            <input id="searchField" type="text" placeholder="User Name" name="UserName" id="UserName">
+            <input type="submit" value="Search"><br>
+        </form>
+    </div>
 
+    <div id="profileDropdown">
+        Logged in as:
+        <br>
+        <button onclick="dropdownProfile()" id="dropdownButton"><%=request.getSession().getAttribute("UserName")%> </button>
+        <div id="dropdownContent" class="dropdownContent">
+            <ul>
+                <li><a href="addFriend.jsp">Add Friend</a></li>
+                <li><a href="sendMessage.jsp">Send Message</a></li>
+                <li><a href="challengeForQuiz.jsp">Challenge User</a></li>
+                <li><a href="mails.jsp">Mails</a></li>
+                <li><a href="friendList.jsp">Friends</a></li>
+                <li><a href="showQuizzes.jsp">Quizzes</a></li>
+            </ul>
+        </div>
+    </div>
 
-    <p>Popular Quizzes</p>
-        <h2>
-            <%
-            %>
-        </h2>
-    <p>Recent Quizzes Activity</p>
-    <h2>
-        <%
-        %>
-    </h2>
-    <p>Recently Created Quizzes</p>
-    <h2>
-        <%
-        %>
-    </h2>
+    <div id="quizLinks">
+        <a href="createQuestion.jsp" id="createQuestion">Create a Quiz</a>
+        <a href="showQuizzes.jsp" id="showQuizzes">Show Quizzes</a>
+        <a href="quizResultPage.jsp" id="quizStats">Quiz Stats</a>
+    </div>
 
-            <form action="/QuizServletGetHistory" method="GET" >
-                <button type="submit">Quiz Stats</button>
-            </form>
+    <form action="/QuizServletGetHistory" method="GET" >
+        <button type="submit">Quiz Stats</button>
+    </form>
 
+    <script src="homepageFunctions.js"></script>
 </body>
 </html>
