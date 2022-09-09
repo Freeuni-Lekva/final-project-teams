@@ -86,6 +86,7 @@ div ul{
 }
 
 a[href="createQuestion.jsp"]{
+    font-family: Bookman, URW Bookman L, serif;
     display: inline-block;
     position: absolute;
     right: 0px;
@@ -102,4 +103,8 @@ a[href="createQuestion.jsp"]{
     background-image: url("https://clipartart.com/images/a-lot-of-books-clipart-6.png");
     background-size: cover;
     background-color: #008ad5;
+}
+
+a[href="createQuestion.jsp"]:hover{
+    background-color: #006ed0;
 }
