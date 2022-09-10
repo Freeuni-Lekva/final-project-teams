@@ -46,6 +46,7 @@
 </head>
     <body>
     <a href="homepage.jsp">Return to homepage</a>
+    <br>
         <a href="createQuestion.jsp">Create new quiz</a>
         <form action="ShowQuizzesServlet" method="post" style="text-align: center">
             <label for="search">Name:</label>
