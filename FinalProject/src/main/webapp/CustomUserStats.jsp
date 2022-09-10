@@ -18,13 +18,11 @@
 <% ArrayList<String> SCORES = (ArrayList) request.getAttribute("Scores"); %>
 <% ArrayList<String> Times = (ArrayList) request.getAttribute("Times"); %>
 
-<h4>UserName :</h4>
-<h4><%= UN %></h4>
      <div align="center">
 
         <table border="1" cellpadding="5">
 
-            <caption><h2>History Of All Quizzes</h2></caption>
+            <caption><h2>History Of Quizzes Written By <%=name%></h2></caption>
 
             <tr>
                 <th>Quiz_Id</th>
