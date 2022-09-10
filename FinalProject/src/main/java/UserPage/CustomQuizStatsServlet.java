@@ -15,46 +15,20 @@ import java.util.List;
 @WebServlet(name = "CustomQuizStatsServlet", value = "/CustomQuizStatsServlet")
 public class CustomQuizStatsServlet extends HttpServlet {
 
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
-
-        String QuizPerPage= request.getParameter("NumOfQuiz");
-        System.out.println(QuizPerPage + "THI IS TVWY");
-
-        int QP = 4;
-        if(QuizPerPage != null){
-            QP = Integer. parseInt(QuizPerPage);
-            System.out.println("NUM BY CHANGE   " + QP);
-        }else if (request.getParameter("currPageNum") != null){
-            QP = Integer.parseInt(request.getParameter("currPageNum"));
-            System.out.println("NUM BY DEF   " + QP);
-        }else{
-            System.out.println("NUM BY DEFDEF   " + QP);
-            QP = 4;
-        }
-
-        request.setAttribute("Num",QP);
-
-
-
-        Integer Page = 0;
-        try {
-            Page = Integer.parseInt(request.getParameter("currPage"));
-            System.out.println(" GET AT -----  " +  Page);
-
-        } catch (NumberFormatException e) {
-            Page = 1;
-        }
-
-        if(request.getParameter("prev") != null ) {
-            Page--;
-        } else if (request.getParameter("next") != null) {
-            Page++;
-        } else if (request.getParameter("jumpTo") != null) {
-            Page = Integer.valueOf(request.getParameter("jump"));
-        }
-        request.setAttribute("page", Page);
-        System.out.println(" SET AT -----  " +  Page);
 
         quizUserHistoryDao HistoryDao;
         try {
@@ -74,30 +48,65 @@ public class CustomQuizStatsServlet extends HttpServlet {
         }
 
         if(request.getParameter("quiz_name")!=null){
-        Quiz_Id = request.getParameter("quiz_name");
+            Quiz_Id = request.getParameter("quiz_name");
         }else{
-        Quiz_Id = request.getParameter("currQuiz");
+            Quiz_Id = request.getParameter("currQuiz");
         }
         request.setAttribute("curQuizName",Quiz_Id);
 
-        //Quiz_Id=12;
-        System.out.println(Quiz_Id);
 
-        ResultSet rs = null;
+        String QuizPerPage= request.getParameter("NumOfQuiz");
 
-/*
-        try{
-            rs = HistoryDao.getQuizStatsSortByTime(Quiz_Id);
+        int QP = 4;
+        if(QuizPerPage != null && isNumeric(QuizPerPage)){
+            QP = Integer. parseInt(QuizPerPage);
+        }else if (request.getParameter("currPageNum") != null){
+            if(isNumeric(request.getParameter("currPageNum")))
+            QP = Integer.parseInt(request.getParameter("currPageNum"));
+        }else{
+            QP = 4;
+        }
+
+        request.setAttribute("Num",QP);
+
+
+
+        Integer Page = 0;
+        try {
+            Page = Integer.parseInt(request.getParameter("currPage"));
+
+        } catch (NumberFormatException e) {
+            Page = 1;
+        }
+
+        int NumOfStats = -1;
+        try {
+            NumOfStats = HistoryDao.getQuizzesCountByQuiz(Quiz_Id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-*/
+
+        if(request.getParameter("prev") != null && Page>1) {
+            Page--;
+        } else if (request.getParameter("next") != null && Page < ((NumOfStats-1+QP)/QP)) {
+            Page++;
+        } else if (request.getParameter("jumpTo") != null &&
+                isNumeric(request.getParameter("jump")) &&
+                (Integer.valueOf(request.getParameter("jump"))) > 0 &&
+                (Integer.valueOf(request.getParameter("jump"))) <= ((NumOfStats-1+QP)/QP)){
+            Page = Integer.valueOf(request.getParameter("jump"));
+        }
+        request.setAttribute("page", Page);
+
+
+
+        ResultSet rs = null;
+
         try {
             switch (sort){
               case 0:
                     rs = HistoryDao.getQuizStats(Quiz_Id);
-                    System.out.println("SORTING BY DEFFFF");
-                  break;
+                                break;
               case 1:
                     rs = HistoryDao.getQuizStatsSortByScore(Quiz_Id);
                 break;
@@ -129,17 +138,10 @@ public class CustomQuizStatsServlet extends HttpServlet {
         try {
             while (rs.next() && count>0) {
                 count--;
-                //           System.out.println("nexyt");
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
-                //Times.add(rs.getString("quiz_time"));
                 Usernames.add(rs.getString("username"));
                 Times.add(rs.getString("quiz_creation_date"));
-/*
-                Quiz_Ids.add(rs.getInt("quiz_id"));
-                Scores.add(rs.getInt("score"));
-                Times.add(rs.getString("quiz_time"));
-                Usernames.add(rs.getString("username"));*/
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

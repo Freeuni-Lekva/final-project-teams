@@ -11,36 +11,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @WebServlet(name = "QuizServletGetHistory", value = "/QuizServletGetHistory")
 public class QuizHistoryGetServlet extends HttpServlet {
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
 
-        /*
-        try {
-            int PageZ = Integer.parseInt(request.getParameter("currPageNum"));
-            System.out.println(" GET AT ----- ZZZZZZZZZZZ " +  PageZ);
-
-        } catch (NumberFormatException e) {
-            int PageZ = 1;
-        }*/
 
         String QuizPerPage= request.getParameter("NumOfQuiz");
 
         int QP = 4;
-        if(QuizPerPage != null){
+        if(QuizPerPage != null && isNumeric(QuizPerPage)){
             QP = Integer. parseInt(QuizPerPage);
-            System.out.println("NUM BY CHANGE   " + QP);
         }else if (request.getParameter("currPageNum") != null){
+            if(isNumeric(request.getParameter("currPageNum")))
             QP = Integer.parseInt(request.getParameter("currPageNum"));
-            System.out.println("NUM BY DEF   " + QP);
         }else{
-            System.out.println("NUM BY DEFDEF   " + QP);
             QP = 4;
         }
-
-        System.out.println(QP + "  SET AS THIS IS PageNum");
 
         quizUserHistoryDao HistoryDao;
         try {
@@ -49,10 +50,6 @@ public class QuizHistoryGetServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
-        //int Quiz_Id;
-        //int Quiz_Id = request.getIntHeader("Quiz_Id");
-        //Quiz_Id=12;
 
         ResultSet rs;
 
@@ -69,29 +66,32 @@ public class QuizHistoryGetServlet extends HttpServlet {
         List<String> Scores = new ArrayList<>();
         List<String> Times = new ArrayList<>();
 
-
-
-
+        int NumOfStats = -1;
+        try {
+            NumOfStats = HistoryDao.getQuizzesCount();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         Integer Page = 0;
         try {
             Page = Integer.parseInt(request.getParameter("currPage"));
-            System.out.println(" GET AT -----  " +  Page);
 
         } catch (NumberFormatException e) {
             Page = 1;
         }
-        //request.setAttribute("Page",Page);
 
-        if(request.getParameter("prev") != null ) {
+        if(request.getParameter("prev") != null && Page>1) {
         Page--;
-        } else if (request.getParameter("next") != null) {
+        } else if (request.getParameter("next") != null && Page < ((NumOfStats-1+QP)/QP)) {
         Page++;
-        } else if (request.getParameter("jumpTo") != null) {
+        } else if (request.getParameter("jumpTo") != null &&
+                isNumeric(request.getParameter("jump")) &&
+                (Integer.valueOf(request.getParameter("jump"))) > 0 &&
+                (Integer.valueOf(request.getParameter("jump"))) <= ((NumOfStats-1+QP)/QP)){
             Page = Integer.valueOf(request.getParameter("jump"));
         }
         request.setAttribute("page", Page);
         request.setAttribute("Num",QP);
-        System.out.println(" SET AT -----  " +  Page);
 
         try {
             rs.absolute((Page-1)*QP);
@@ -104,10 +104,8 @@ public class QuizHistoryGetServlet extends HttpServlet {
         try {
             while (rs.next() && count>0) {
                 count--;
-                //           System.out.println("nexyt");
                 Quiz_Names.add(rs.getString("quiz_name"));
                 Scores.add(rs.getString("score"));
-                //Times.add(rs.getString("quiz_time"));
                 Usernames.add(rs.getString("username"));
                 Times.add(rs.getString("quiz_creation_date"));
             }

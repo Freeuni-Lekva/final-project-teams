@@ -1,9 +1,6 @@
 package DAOs;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class quizUserHistoryDao implements quizHistoryDao{
 
@@ -174,5 +171,75 @@ public class quizUserHistoryDao implements quizHistoryDao{
         ResultSet rs = prepStmt.executeQuery();
         return rs;
     }
+
+    @Override
+    public ResultSet getMaxScorePerQuiz(String Username) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+        "SELECT  MAX(score), quiz_name FROM quizHistory where username = ? GROUP BY quiz_name;"
+        );
+
+        prepStmt.setString(1, Username);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs;
+    }
+
+    @Override
+    public ResultSet getCreatedByUser(String Username) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "SELECT  quiz_name,quiz_creation_date FROM quizHistory where username = ? GROUP BY quiz_name;");
+
+        prepStmt.setString(1, Username);
+        ResultSet rs = prepStmt.executeQuery();
+        return rs;
+
+
+    }
+
+    @Override
+    public int getQuizzesCount() throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "SELECT COUNT(*) FROM  quizHistory;"
+        );
+
+        ResultSet rs = prepStmt.executeQuery();
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+    @Override
+    public int getQuizzesCountByUser(String Username) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "SELECT COUNT(*) FROM  quizHistory where username = ?;"
+        );
+
+        prepStmt.setString(1, Username);
+
+        ResultSet rs = prepStmt.executeQuery();
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+    @Override
+    public int getQuizzesCountByQuiz(String Quiz) throws SQLException {
+        PreparedStatement prepStmt = conn.prepareStatement(
+                "SELECT COUNT(*) FROM  quizHistory where quiz_name = ?;"
+        );
+
+        prepStmt.setString(1, Quiz);
+
+        ResultSet rs = prepStmt.executeQuery();
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+/*
+    SELECT  MAX(score), quiz_name FROM quizHistory GROUP BY quiz_name;
+*/
 
 }

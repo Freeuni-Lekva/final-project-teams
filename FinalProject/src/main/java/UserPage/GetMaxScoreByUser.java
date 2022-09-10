@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "QuizCreatedUserServlet", value = "/QuizCreatedUserServlet")
-public class QuizCreatedByUserServlet extends HttpServlet {
+@WebServlet(name = "MaxScoreByUser", value = "/MaxScoreByUser")
+public class GetMaxScoreByUser extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -26,27 +26,27 @@ public class QuizCreatedByUserServlet extends HttpServlet {
         ResultSet RS = null;
 
         try {
-            RS = HistoryDao.getCreatedByUser((String) request.getSession().getAttribute("UserName"));
+            RS = HistoryDao.getMaxScorePerQuiz((String) request.getSession().getAttribute("UserName"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         List<String> Quiz_Names = new ArrayList<>();
-        List<String> Times = new ArrayList<>();
+        List<String> Scores = new ArrayList<>();
 
         try {
             while (RS.next()) {
                 Quiz_Names.add(RS.getString("quiz_name"));
-                Times.add(RS.getString("quiz_creation_date"));
+                Scores.add(RS.getString("MAX(score)"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         request.setAttribute("Quiz_Names",Quiz_Names);
-        request.setAttribute("Times",Times);
+        request.setAttribute("Scores",Scores);
 
 
-        request.getRequestDispatcher("QuizzesCreatedByUser.jsp").forward(request, response);
+        request.getRequestDispatcher("GetMaxScorePerUser.jsp").forward(request, response);
     }
 }
