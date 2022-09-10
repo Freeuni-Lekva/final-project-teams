@@ -53,7 +53,7 @@ public class AccountDAO {
     }
 
     public List<User> searchAccountsByUsername(String username) throws SQLException {
-        PreparedStatement prepStmt = conn.prepareStatement("SELECT username FROM accounts WHERE " +
+        PreparedStatement prepStmt = conn.prepareStatement("SELECT id, username FROM accounts WHERE " +
                 "username LIKE ?;");
         prepStmt.setString(1, username + "%");
         ResultSet rs = prepStmt.executeQuery();
@@ -61,7 +61,7 @@ public class AccountDAO {
         List<User> accounts = new ArrayList<>();
 
         while(rs.next()){
-            User user = new User(rs.getInt("user_id"), rs.getString("username"));
+            User user = new User(rs.getInt("id"), rs.getString("username"));
             accounts.add(user);
         }
 
@@ -90,9 +90,10 @@ public class AccountDAO {
                     "where a.id = ?;");
             prepStmt.setInt(1, user_id);
             ResultSet rs = prepStmt.executeQuery();
-            rs.next();
-            return rs.getString("username");
-
+            if(rs.next()){
+                return rs.getString("username");
+            }
+            return null;
     }
 
     private static String hexToString(byte[] bytes) {
