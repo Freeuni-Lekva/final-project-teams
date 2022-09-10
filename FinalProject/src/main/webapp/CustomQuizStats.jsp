@@ -10,8 +10,6 @@
 <body>
 
 
-<h4>${maxxx}</h4>
-
 <% ArrayList<String> Q_IDS = (ArrayList) request.getAttribute("Quiz_Ids"); %>
 <% ArrayList<String> USERS = (ArrayList) request.getAttribute("Usernames"); %>
 <% ArrayList<String> SCORES = (ArrayList) request.getAttribute("Scores"); %>
@@ -20,12 +18,14 @@
 <% String name =  (String)request.getAttribute("curQuizName"); %>
 <% Integer PageNum =  (Integer) request.getAttribute("Num"); %>
 
+<h4>MAX SCORE ON QUIZ <%= name %>  IS ${maxxx}</h4>
+
 
      <div align="center">
 
         <table border="1" cellpadding="5">
 
-            <caption><h2>History Of All Quizzes</h2></caption>
+            <caption><h2>History Of Quiz <%= name %></h2></caption>
 
             <tr>
                 <th>Quiz_Id</th>
@@ -90,8 +90,7 @@
             <input type="text" name="quiz_name" value="${quiz_name}" /><br/>
 
             <label for="ORDER_BY">SORT BY</label>
-            <input type="radio"  value="0" name="sort" checked> Time
-            <input type="radio"  value="1" name="sort"> SCORE
+            <input type="radio"  value="0" name="sort"> Time
             <button type="submit">Quiz Stats</button>
         </form>
 

@@ -246,7 +246,7 @@ public class QuizzesDAO {
 
     public ResultSet GetQuizzesByAuthor(String author) throws SQLException {
         PreparedStatement prepStmt = conn.prepareStatement(
-                "select * from quizzes where author = ?;"
+                "select name , quiz_creation_date from quizzes where author = ?;"
         );
 
         prepStmt.setString(1, author);

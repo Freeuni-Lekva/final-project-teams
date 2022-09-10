@@ -20,4 +20,12 @@ public interface quizHistoryDao {
     public ResultSet getUserStatsByScore(String Username) throws SQLException;
     public ResultSet getUserStatsDistinct(String Username) throws SQLException;
     public ResultSet getDistinctQuizCount(String Username) throws SQLException;
-    }
+    public ResultSet getMaxScorePerQuiz(String Username) throws SQLException;
+    public ResultSet getCreatedByUser(String Username) throws SQLException;
+
+    public int getQuizzesCount() throws SQLException;
+    public int getQuizzesCountByUser(String Username) throws SQLException;
+    public int getQuizzesCountByQuiz(String Username) throws SQLException;
+
+
+}

@@ -65,6 +65,10 @@
         <button type="submit">Quiz Stats</button>
     </form>
 
+    <form action="/AchievementServlet" method="GET" >
+        <button type="submit">Achievements</button>
+    </form>
+
     <script src="homepageFunctions.js"></script>
 </body>
 </html>
