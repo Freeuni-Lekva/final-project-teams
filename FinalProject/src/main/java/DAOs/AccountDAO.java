@@ -90,8 +90,10 @@ public class AccountDAO {
                     "where a.id = ?;");
             prepStmt.setInt(1, user_id);
             ResultSet rs = prepStmt.executeQuery();
-            rs.next();
-            return rs.getString("username");
+            if(rs.next()){
+                return rs.getString("username");
+            }
+            return null;
     }
 
     private static String hexToString(byte[] bytes) {

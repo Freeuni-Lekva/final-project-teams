@@ -25,7 +25,7 @@ public class TestAccountDAO{
         if(!accDao.accountUsernameExists("Giorgi")){
             assertTrue(accDao.addAccount("Giorgi", "Giorgi"));
         }
-        if(!accDao.accountUsernameExists("Giorgi")){
+        if(!accDao.accountUsernameExists("Giorgi1")){
             assertTrue(accDao.addAccount("Giorgi1", "Giorgi"));
         }
         if(!accDao.accountUsernameExists("Levani")){
@@ -49,9 +49,19 @@ public class TestAccountDAO{
         User user2 = new User(accDao.getAccountIdByUsername("Giorgi1"), "Giorgi1");
         usersExpected.add(user2);
         List<User> usersReturned = accDao.searchAccountsByUsername("Giorgi");
-        assertEquals(usersExpected, usersReturned);
+        assertEquals(usersReturned, usersExpected);
         User user3 = new User(accDao.getAccountIdByUsername("Levani"), "Levani");
         usersExpected.add(user3);
-        assertNotEquals(usersExpected, usersReturned);
+        assertNotEquals(usersReturned, usersExpected);
+    }
+
+    @Test
+    public void testIdsAndUsernames() throws SQLException {
+        assertEquals(-1, accDao.getAccountIdByUsername("Mariam"));
+        User user = accDao.searchAccountsByUsername("Levani").get(0);
+        assertEquals(user.getUserId(), accDao.getAccountIdByUsername("Levani"));
+        assertNotEquals(-1, accDao.getAccountIdByUsername("Levani"));
+        assertEquals("Levani", accDao.getUserNameByAccountId(user.getUserId()));
+        String xd = accDao.getUserNameByAccountId(-1);
     }
 }
