@@ -45,11 +45,6 @@ public class FriendDAO {
         }
     }
 
-    // amas mere davwer tu dagvchirda idk? tan zustad ar vici rogor amovshalo
-    public boolean removeFriend(String friend1, String friend2){
-        return false;
-    }
-
     // ikos jer idebze ro rame shevcvli
     public List<Integer> getFriends(String username) throws SQLException {
         AccountDAO accDao = new AccountDAO();
