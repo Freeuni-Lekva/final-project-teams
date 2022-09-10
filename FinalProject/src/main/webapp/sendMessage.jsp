@@ -10,8 +10,6 @@
 <head>
     <title>Send Message</title>
 </head>
-<head><title>Add Friend</title>
-</head>
 <body>
 <form action="/sendMessageServlet" method="POST" >
     <h2>Login</h2>
