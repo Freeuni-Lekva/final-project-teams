@@ -24,6 +24,7 @@ public class CreateAccountServlet extends HttpServlet {
         AccountDAO acc = new AccountDAO();
         try {
             if(acc.addAccount(userName, password)){
+                request.getSession().setAttribute("UserName", userName);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
                 dispatcher.forward(request, response);
             } else {

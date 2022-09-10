@@ -35,6 +35,7 @@
     <title>Create Quiz</title>
 </head>
     <body>
+        <a href="homepage.jsp">Return to homepage</a>
         <h1>Create new Question:</h1><br>
         <p>(If question or answer field is left empty, new question will not be added.)</p>
         <%

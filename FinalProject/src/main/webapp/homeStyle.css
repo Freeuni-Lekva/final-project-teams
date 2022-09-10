@@ -94,6 +94,7 @@ div ul{
 }
 
 #quizLinks a {
+    display: inline-block;
     font-family: Bookman, URW Bookman L, serif;
     margin: 20px;
     border: 2px solid black;

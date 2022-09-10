@@ -9,6 +9,7 @@
     <title>HisToryOfQuiz</title>
 </head>
 <body>
+    <a href="homepage.jsp">Return to homepage</a>
 <% Integer Page =  (Integer) request.getAttribute("page"); %>
 <% Integer PageNum =  (Integer) request.getAttribute("Num"); %>
 <% ArrayList<String> Q_IDS = (ArrayList) request.getAttribute("Quiz_Ids"); %>
