@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="homeStyle.css"/>
 </head>
 <body>
-    <h1><b>Home Page</b></h1>
+    <h1><b>Quiz Website</b></h1>
 
 
     <div id="usernameSearch">
@@ -50,7 +50,6 @@
                 <li><a href="challengeForQuiz.jsp">Challenge User</a></li>
                 <li><a href="mails.jsp">Mails</a></li>
                 <li><a href="friendList.jsp">Friends</a></li>
-                <li><a href="showQuizzes.jsp">Quizzes</a></li>
             </ul>
         </div>
     </div>
