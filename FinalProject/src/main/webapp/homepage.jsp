@@ -62,11 +62,6 @@
         </form>
     </div>
 
-
-    <form action="/QuizServletGetHistory" method="GET" >
-        <button type="submit">Quiz Stats</button>
-    </form>
-
     <form action="/AchievementServlet" method="GET" >
         <button type="submit">Achievements</button>
     </form>
