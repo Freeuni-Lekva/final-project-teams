@@ -1,5 +1,3 @@
-USE test;
-
 DROP TABLE IF EXISTS user_achievements;
 DROP TABLE IF EXISTS mails;
 DROP TABLE IF EXISTS friends;
@@ -33,9 +31,9 @@ CREATE TABLE mails(
                       mail_type VARCHAR(255) NOT NULL,
                       message VARCHAR(255) NOT NULL,
                       quiz_id INT NOT NULL DEFAULT -1,
-                      date_sent	DATETIME DEFAULT   CURRENT_TIMESTAMP,
+                      date_sent DATETIME DEFAULT   CURRENT_TIMESTAMP,
                       CONSTRAINT fk_sender_id FOREIGN KEY (sender_id) REFERENCES accounts(id),
-                      CONSTRAINT fk_sender_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
+                      CONSTRAINT fk_reciever_id FOREIGN KEY (receiver_id) REFERENCES accounts(id)
 );
 
 CREATE TABLE quizzes(
@@ -98,5 +96,3 @@ CREATE TABLE user_achievements(
     CONSTRAINT fk_usach_user_id FOREIGN KEY (user_id) REFERENCES accounts (id),
     CONSTRAINT fk_usach_achievement_id FOREIGN KEY (achievement_id) REFERENCES achievements(id)
 );
-
-/* aq insertebis script iqneba sachiro rom user_achievements-shi chaikaros yvela achievementi */
