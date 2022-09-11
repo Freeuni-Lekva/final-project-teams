@@ -29,10 +29,17 @@ public class AcceptQuizChallengeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = (String) request.getSession().getAttribute("UserName");
         String challengeSender = request.getParameter("ChallengeSender");
-        int quizId = Integer.parseInt(request.getParameter("SentQuizId"));
-        FriendDAO friendDAO = new FriendDAO();
+        int quizId = Integer.parseInt(request.getParameter("ReceivedQuizId"));
+        int mailId = Integer.parseInt(request.getParameter("MailId"));
+        MailsDao mailsDao = new MailsDao();
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("quiz.jsp?id=" + quizId);
-            dispatcher.forward(request, response);
+        try {
+            mailsDao.removeMail(mailId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("quiz.jsp?QUIZ_ID=" + quizId);
+        dispatcher.forward(request, response);
     }
 }

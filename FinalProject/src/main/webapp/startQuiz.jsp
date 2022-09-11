@@ -19,11 +19,12 @@
 <form method="post" action="/challengeForQuizServlet">
   <label><b>Quiz Name: <%out.println(quizDB.getQuizName(quizId));%></b></label><br>
   <label for="CHALLENGED_QUIZ_ID">Challenge Friend: </label>
-  <input type="text" name="UserNameOfFriend" value="">
-
-  <input type="hidden" id="CHALLENGED_QUIZ_ID" name="CHALLENGED_QUIZ_ID" value="<%out.println(quizId);%>">
+  <input type="text" placeholder="Enter User Name" name="UserNameOfFriend" value="">
+  <input type="text" placeholder="Send Message" name="MessageForQuizChallenge" id="MessageForQuizChallenge">
+  <input type="hidden" id="CHALLENGED_QUIZ_ID" name="CHALLENGED_QUIZ_ID" value="<%out.print(quizId);%>">
   <input type="submit" value="Next">
 </form>
 <a href="quiz.jsp?QUIZ_ID=<%out.println(quizId);%>">Start Quiz</a>
+<a href="homepage.jsp">Return to HomePage</a><br>
 </body>
 </html>

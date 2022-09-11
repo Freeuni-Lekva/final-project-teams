@@ -30,7 +30,7 @@ public class MailsDao {
         List<Mail> mails = new ArrayList();
 
         while(rs.next()) {
-            Mail mail = new Mail(rs.getInt("sender_id"), rs.getInt("receiver_id"), rs.getString("mail_type"), rs.getString("message"), rs.getInt("id"));
+            Mail mail = new Mail(rs.getInt("sender_id"), rs.getInt("receiver_id"), rs.getString("mail_type"), rs.getString("message"),rs.getInt("quiz_id"), rs.getInt("id"));
             mails.add(mail);
         }
 
