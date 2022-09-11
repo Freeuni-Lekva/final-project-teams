@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<a href="homepage.jsp">Return to homepage</a>
+
 <% ArrayList<String> Q_IDS = (ArrayList) request.getAttribute("Quiz_Names"); %>
 <% ArrayList<String> SCORES = (ArrayList) request.getAttribute("Scores"); %>
 

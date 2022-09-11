@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<a href="homepage.jsp">Return to homepage</a>
 
 <% ArrayList<String> Q_IDS = (ArrayList) request.getAttribute("Quiz_Ids"); %>
 <% ArrayList<String> USERS = (ArrayList) request.getAttribute("Usernames"); %>
@@ -91,7 +92,7 @@
 
             <label for="ORDER_BY">SORT BY</label>
             <input type="radio"  value="0" name="sort"> Time
-            <button type="submit">Quiz Stats</button>
+            <button type="submit">Search</button>
         </form>
 
 
@@ -99,7 +100,7 @@
             <label for="name"    >Search Stats Of Custom Username   </label>
             <input type="text" name="name" value="${name}" /><br/>
 
-            <button type="submit">Quiz Stats</button>
+            <button type="submit">Search</button>
         </form>
 
         ${MaxS}

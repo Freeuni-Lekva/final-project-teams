@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<a href="homepage.jsp">Return to homepage</a>
+
 <h4>${QuizCreated} Quizzes Created</h4>
 <form action="/QuizCreatedUserServlet" method="GET" >
    <button type="submit">See Quizzes Created </button>

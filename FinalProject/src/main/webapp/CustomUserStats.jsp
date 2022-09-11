@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<a href="homepage.jsp">Return to homepage</a>
+
 <% Integer Page =  (Integer) request.getAttribute("page"); %>
 <% Integer PageNum =  (Integer) request.getAttribute("Num"); %>
 <% String name =  (String) request.getAttribute("User");%>

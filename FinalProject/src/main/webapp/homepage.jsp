@@ -62,6 +62,8 @@
         </form>
     </div>
 
+    <a href="login.jsp">Sign out</a>
+
     <form action="/AchievementServlet" method="GET" >
         <button type="submit">Achievements</button>
     </form>

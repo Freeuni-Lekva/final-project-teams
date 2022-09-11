@@ -186,7 +186,7 @@ public class quizUserHistoryDao implements quizHistoryDao{
     @Override
     public ResultSet getCreatedByUser(String Username) throws SQLException {
         PreparedStatement prepStmt = conn.prepareStatement(
-                "SELECT  quiz_name,quiz_creation_date FROM quizHistory where username = ? GROUP BY quiz_name;");
+                "SELECT  name,quiz_creation_date FROM quizzes where author = ?;");
 
         prepStmt.setString(1, Username);
         ResultSet rs = prepStmt.executeQuery();

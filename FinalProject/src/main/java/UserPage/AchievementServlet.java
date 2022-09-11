@@ -62,8 +62,8 @@ public class AchievementServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("QuizCreated",DistinctQuizCount);
-        request.setAttribute("QuizTaken",QuizCreated);
+        request.setAttribute("QuizCreated",QuizCreated);
+        request.setAttribute("QuizTaken",DistinctQuizCount);
 
         request.getRequestDispatcher("Achievments.jsp").forward(request, response);
     }

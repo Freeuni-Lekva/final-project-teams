@@ -36,7 +36,7 @@ public class QuizCreatedByUserServlet extends HttpServlet {
 
         try {
             while (RS.next()) {
-                Quiz_Names.add(RS.getString("quiz_name"));
+                Quiz_Names.add(RS.getString("name"));
                 Times.add(RS.getString("quiz_creation_date"));
             }
         } catch (SQLException e) {
