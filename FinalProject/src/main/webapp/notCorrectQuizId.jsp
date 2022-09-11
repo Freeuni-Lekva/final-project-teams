@@ -11,6 +11,6 @@
     <title>Not correct quiz id</title>
 </head>
 <body>
-
+    <label>There is no such quiz</label>
 </body>
 </html>

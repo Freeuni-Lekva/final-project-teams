@@ -28,7 +28,8 @@ public class ChallengeForQuizServlet extends HttpServlet {
         String userName = request.getParameter("UserNameOfFriend");
         int quizId = -1;
         try {
-             quizId = Integer.parseInt(request.getParameter("CHALLENGED_QUIZ_ID"));
+              quizId = Integer.parseInt(request.getParameter("CHALLENGED_QUIZ_ID"));
+              System.out.println(quizId);
         } catch (NumberFormatException ex) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("notCorrectQuizId.jsp");
             dispatcher.forward(request,response);
