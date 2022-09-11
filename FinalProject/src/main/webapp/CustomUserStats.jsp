@@ -85,14 +85,14 @@
             <label for="name">Search Stats Of Custom Username   </label>
             <input type="text" name="name" value="${name}" /><br/>
 
-            <button type="submit">Quiz Stats</button>
+            <button type="submit">Search</button>
         </form>
 
         <form action="/CustomQuizStatsServlet" method="GET" >
             <label for="quiz_name">Search Stats Of Custom Quiz Name </label>
             <input type="text" name="quiz_name" value="${quiz_name}" /><br/>
 
-            <button type="submit">Quiz Stats</button>
+            <button type="submit">Search</button>
         </form>
 
 

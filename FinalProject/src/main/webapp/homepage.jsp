@@ -47,7 +47,6 @@
             <ul>
                 <li><a href="addFriend.jsp">Add Friend</a></li>
                 <li><a href="sendMessage.jsp">Send Message</a></li>
-                <li><a href="challengeForQuiz.jsp">Challenge User</a></li>
                 <li><a href="mails.jsp">Mails</a></li>
                 <li><a href="friendList.jsp">Friends</a></li>
             </ul>
